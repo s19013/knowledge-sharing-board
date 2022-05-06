@@ -17,7 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('id',true);
             $table->unsignedBigInteger('owner_id');
             $table->string('name');
-            $table->integer('public');//booleanが上手く使えないので true:1 falses:0として使う
+            $table->integer('public')->default(1);//booleanが上手く使えないので true:1 falses:0として使う
 
             $table->softDeletes();
             $table->timestamp('updated_at')->default(\DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
