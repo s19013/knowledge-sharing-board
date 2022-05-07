@@ -31,9 +31,9 @@ class AppServiceProvider extends ServiceProvider
                 //第2引数はわたしたい変数or配列名
                 $imgUrl = User::select('imgUrl')
                             ->where('id','=',\Auth::id())
-                            ->find();
+                            ->first();
 
-                $view->with('imgUrl',$imgUrl);
+                $view->with('imgUrl',$imgUrl['imgUrl']);
             });
     }
 }
