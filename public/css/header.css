@@ -1,0 +1,53 @@
+header {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 14% 24% 24% 24% 14%;
+      grid-template-columns: 14% 24% 24% 24% 14%;
+  -ms-grid-rows: 6vmin;
+      grid-template-rows: 6vmin;
+  background-color: #e1e1e1;
+  border-bottom: 1px solid black;
+}
+
+header .slideMenuBtn {
+  border: 1px solid #999;
+  background: #7ee3ff;
+  color: black;
+  width: 100%;
+  height: 80%;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 1;
+  grid-column: 1/2;
+  -ms-grid-row: 1;
+  grid-row: 1;
+}
+
+header .roomName {
+  -ms-grid-column: 3;
+  -ms-grid-column-span: 1;
+  grid-column: 3/4;
+  -ms-grid-row: 1;
+  grid-row: 1;
+  width: 100%;
+  height: 100%;
+}
+
+header a {
+  -ms-grid-column: 5;
+  -ms-grid-column-span: 1;
+  grid-column: 5/6;
+  -ms-grid-row: 1;
+  grid-row: 1;
+}
+
+@media screen and (max-width: 768px) {
+  header {
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: 24% 14% 24% 14% 24%;
+        grid-template-columns: 24% 14% 24% 14% 24%;
+    -ms-grid-rows: 10vmin;
+        grid-template-rows: 10vmin;
+  }
+}
+/*# sourceMappingURL=header.css.map */
