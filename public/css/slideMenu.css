@@ -1,0 +1,45 @@
+@charset "UTF-8";
+.slideMenu {
+  /* メニュー */
+}
+
+.slideMenu a {
+  color: #fff;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.slideMenu li {
+  margin: 2rem 0;
+  list-style: none;
+}
+
+.slideMenu nav {
+  background: #0bd;
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  top: 6vmin;
+  overflow-x: hidden;
+  text-align: center;
+  width: 0;
+  -webkit-transition: .2s;
+  transition: .2s;
+  /* アニメ */
+  /* メニューを開いた時 */
+}
+
+.slideMenu nav.open-menu {
+  width: 80vmin;
+  height: 100vh;
+  -webkit-transition: .2s;
+  transition: .2s;
+  /* アニメ */
+}
+
+@media screen and (max-width: 768px) {
+  .slideMenu nav {
+    top: 10vmin;
+  }
+}
+/*# sourceMappingURL=slidemenu.css.map */

@@ -1,0 +1,40 @@
+.slideMenu{
+    a {
+        color: #fff;
+        text-decoration: none;
+        white-space: nowrap;
+      }
+      li {
+        margin: 2rem 0;
+        list-style:none;
+      }
+
+      /* メニュー */
+      nav {
+        background: #0bd;
+        position: absolute;
+        z-index: 1;//これで一つ前のレイヤーへ
+        left: 0; //初期の位置
+        top:6vmin;
+        overflow-x: hidden;
+        text-align: center;
+        width: 0;
+        // height: 100vh;
+        transition: .2s; /* アニメ */
+
+        /* メニューを開いた時 */
+        &.open-menu {
+          width: 80vmin;
+          height: 100vh;
+          transition: .2s; /* アニメ */
+        }
+      }
+
+      @media screen and (max-width:768px) {
+        nav{
+            top:10vmin;
+        }
+    }
+
+}
+
