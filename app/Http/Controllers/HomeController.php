@@ -3,9 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\LinkCard;
+use App\Models\Room;
+use App\Models\RoomMember;
+use App\Models\User;
 
 class HomeController extends Controller
 {
+    // imgUrlはAppServieceProvide.phpで取っている
+
     /**
      * Create a new controller instance.
      *
@@ -21,8 +27,8 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
-    {
-        return view('home');
+
+    public function myRoom(){
+        return view('child/myRoom');
     }
 }
