@@ -9,9 +9,9 @@ use App\Models\RoomMember;
 use App\Models\User;
 use DB;
 
+
 class HomeController extends Controller
 {
-
 
     /**
      * Create a new controller instance.
@@ -61,6 +61,35 @@ class HomeController extends Controller
         return view('child/makeRoom',compact('roomName'));
     }
 
+
+    public function transitionToRoom($roomId)
+    {
+        // メンバーかどうか確かめる
+        if (checkIsHeMember(\Auth::id(),$roomId)) {
+            $linkCards = LinkCard::select('title','comment','url')
+            ->where('room_id','=',$roomId)
+            ->get();
+            $roomName = getRoomsName($roomId);
+            return view('child/room',compact('roomName','roomId','linkCards'));
+        } else {
+            $this->myRoom();
+        }
+    }
+}
+
+function getRoomsName($roomId)
+{
+    $roomName = Room::select('name')
+            ->where('id','=',$roomId)
+            ->first();
+    return $roomName['name'];
+}
+
+function checkIsHeMember($userId,$roomId)
+{
+    return RoomMember::where('member_id','=',$userId)
+            ->where('room_id','=',$roomId)
+            ->exists();//メンバーならtrue
 }
 
 function findGroupsUserBelongto(){
@@ -71,9 +100,9 @@ function findGroupsUserBelongto(){
         ->get();
 }
 
-function getImgUrl($id){
+function getImgUrl($userId){
     $imgUrl = User::select('imgUrl')
-        ->where('id','=',$id)
-        ->first();
+            ->where('id','=',$userId)
+            ->first();
     return  $imgUrl['imgUrl'];
 }
