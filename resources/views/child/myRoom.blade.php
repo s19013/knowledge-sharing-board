@@ -1,5 +1,8 @@
 @extends('layouts.app')
 
+@section('css')
+<link rel="stylesheet" href="{{ asset('css/myRoom.css') }}">
+@endsection
 @section('content')
 <div class="container">
     <div class="userInfBox">
@@ -15,7 +18,11 @@
     </div>
 
     @foreach ($roomsUserBelongTo as $rooms)
-            <p>{{$rooms['name']}}</p>
+    <div class="roomsContena">
+        <p>{{$rooms['name']}}</p>
+        <button onclick="location.href='/room/{{$rooms['room_id']}}'">部屋に入る</button>
+    </div>
+
     @endforeach
 </div>
 @endsection
