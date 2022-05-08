@@ -24,16 +24,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //すべてのメソッドが呼ばれる前に先に呼ばれるメソッド
-        view()->composer('*',function($view) {
-                //ビューにわたす
-                //第1引数はViewで使う時の命名
-                //第2引数はわたしたい変数or配列名
-                $imgUrl = User::select('imgUrl')
-                            ->where('id','=',\Auth::id())
-                            ->first();
 
-                $view->with('imgUrl',$imgUrl['imgUrl']);
-            });
     }
 }
