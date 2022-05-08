@@ -27,7 +27,20 @@
 <body>
     <header>
         <button class="LeftSlideMenuBtn m-1" id="LeftSlideMenuBtn">メニュー</button>
+            <div class="LeftSlideMenu">
+                <nav id="LeftSlideMenuNav">
+                    <ul class="p-0">
+                      <li><a href="#">ホーム</a></li>
+                      <li><a href="#">サービス概要</a></li>
+                      <li><a href="#">実績紹介</a></li>
+                      <li><a href="#">お問い合わせ</a></li>
+                    </ul>
+                    <button class="d-flex align-items-end mx-auto">部屋を作る</button>
+                </nav>
+            </div>
+
         <p class="text-center fs-5 m-2 roomName">部屋の名前</p>
+
         <div class="myRoomIconContena" id="RightSlideMenuBtn" >
             <button>
                 @if (empty($imgUrl))
@@ -38,38 +51,28 @@
                 @endif
             </button>
         </div>
+            <div class="RightSlideMenu">
+                <nav id="RightSlideMenuNav">
+                    <ul class="p-0">
+                        <li><a href="/myRoom">マイルーム</a></li>
+                        <li>
+                            <a class="dropdown-item p-0" href="{{ route('logout') }}"
+                            onclick="event.preventDefault();
+                                          document.getElementById('logout-form').submit();">
+                            {{ __('Logout') }}
+                            </a>
+
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                 @csrf
+                            </form>
+                        </li>
+                    </ul>
+                    <button class="d-flex align-items-end mx-auto">部屋を作る</button>
+                </nav>
+            </div>
+
     </header>
     <div id="app">
-        <div class="LeftSlideMenu">
-            <nav id="LeftSlideMenuNav">
-                <ul class="p-0">
-                  <li><a href="#">ホーム</a></li>
-                  <li><a href="#">サービス概要</a></li>
-                  <li><a href="#">実績紹介</a></li>
-                  <li><a href="#">お問い合わせ</a></li>
-                </ul>
-                <button class="d-flex align-items-end mx-auto">部屋を作る</button>
-            </nav>
-        </div>
-        <div class="RightSlideMenu">
-            <nav id="RightSlideMenuNav">
-                <ul class="p-0">
-                    <li><a href="/myRoom">マイルーム</a></li>
-                    <li>
-                        <a class="dropdown-item p-0" href="{{ route('logout') }}"
-                        onclick="event.preventDefault();
-                                      document.getElementById('logout-form').submit();">
-                        {{ __('Logout') }}
-                        </a>
-
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                         @csrf
-                    </form>
-                    </li>
-                </ul>
-                <button class="d-flex align-items-end mx-auto">部屋を作る</button>
-            </nav>
-        </div>
 
         <main class="py-4">
             @yield('content')
