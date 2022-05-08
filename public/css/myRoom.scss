@@ -1,0 +1,29 @@
+.userInfBox{
+    display: grid;
+    grid-template-columns: 5% 10% 10% 10% 10% 10% 10% 10% 10% 10% 5%;
+    grid-template-rows: 10vmin;
+
+    img{
+        grid-column: 2/3;
+        grid-row: 1;
+        width: 9vmin;
+        height: 9vmin;
+        object-fit: cover;
+        margin : auto;
+    }
+
+    p{
+        border: 1px solid #999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        grid-column: 4/11;
+        grid-row: 1;
+    }
+}
+
+.ButtonsContena{
+    margin: 3vmin 0;
+    height: 5vmin;
+}

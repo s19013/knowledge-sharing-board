@@ -1,0 +1,46 @@
+.userInfBox {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 5% 10% 10% 10% 10% 10% 10% 10% 10% 10% 5%;
+      grid-template-columns: 5% 10% 10% 10% 10% 10% 10% 10% 10% 10% 5%;
+  -ms-grid-rows: 10vmin;
+      grid-template-rows: 10vmin;
+}
+
+.userInfBox img {
+  -ms-grid-column: 2;
+  -ms-grid-column-span: 1;
+  grid-column: 2/3;
+  -ms-grid-row: 1;
+  grid-row: 1;
+  width: 9vmin;
+  height: 9vmin;
+  -o-object-fit: cover;
+     object-fit: cover;
+  margin: auto;
+}
+
+.userInfBox p {
+  border: 1px solid #999;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  width: 100%;
+  -ms-grid-column: 4;
+  -ms-grid-column-span: 7;
+  grid-column: 4/11;
+  -ms-grid-row: 1;
+  grid-row: 1;
+}
+
+.ButtonsContena {
+  margin: 3vmin 0;
+  height: 5vmin;
+}
+/*# sourceMappingURL=myRoom.css.map */
