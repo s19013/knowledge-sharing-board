@@ -10,8 +10,12 @@
     </div>
 
     <div class="ButtonsContena row justify-content-between">
-        <button type="button" class="makeRoomBtn btn btn-primary col-3">部屋を作る</button>
-        <button type="button" class="searchRoomBtn btn btn-primary col-3" onclick="location.href='./index.html'">部屋を探す</button>
+        <button type="button" class="makeRoomBtn btn btn-primary col-3" onclick="location.href='{{route('transitionToMakeRoom')}}'">部屋を作る</button>
+        <button type="button" class="searchRoomBtn btn btn-primary col-3" onclick="location.href=''">部屋を探す</button>
     </div>
+
+    @foreach ($roomsUserBelongTo as $rooms)
+            <p>{{$rooms['name']}}</p>
+    @endforeach
 </div>
 @endsection
