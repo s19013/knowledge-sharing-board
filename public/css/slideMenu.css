@@ -1,24 +1,23 @@
 @charset "UTF-8";
-.slideMenu {
+.LeftSlideMenu {
   /* メニュー */
 }
 
-.slideMenu a {
+.LeftSlideMenu a {
   color: #fff;
   text-decoration: none;
   white-space: nowrap;
 }
 
-.slideMenu li {
+.LeftSlideMenu li {
   margin: 2rem 0;
   list-style: none;
 }
 
-.slideMenu nav {
+.LeftSlideMenu nav {
   background: #0bd;
   position: absolute;
   z-index: 1;
-  left: 0;
   top: 6vmin;
   overflow-x: hidden;
   text-align: center;
@@ -29,7 +28,7 @@
   /* メニューを開いた時 */
 }
 
-.slideMenu nav.open-menu {
+.LeftSlideMenu nav.open-menu {
   width: 80vmin;
   height: 100vh;
   -webkit-transition: .2s;
@@ -38,8 +37,59 @@
 }
 
 @media screen and (max-width: 768px) {
-  .slideMenu nav {
+  .LeftSlideMenu nav {
     top: 10vmin;
   }
+}
+
+.LeftSlideMenu nav {
+  left: 0;
+}
+
+.RightSlideMenu {
+  /* メニュー */
+}
+
+.RightSlideMenu a {
+  color: #fff;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.RightSlideMenu li {
+  margin: 2rem 0;
+  list-style: none;
+}
+
+.RightSlideMenu nav {
+  background: #0bd;
+  position: absolute;
+  z-index: 1;
+  top: 6vmin;
+  overflow-x: hidden;
+  text-align: center;
+  width: 0;
+  -webkit-transition: .2s;
+  transition: .2s;
+  /* アニメ */
+  /* メニューを開いた時 */
+}
+
+.RightSlideMenu nav.open-menu {
+  width: 80vmin;
+  height: 100vh;
+  -webkit-transition: .2s;
+  transition: .2s;
+  /* アニメ */
+}
+
+@media screen and (max-width: 768px) {
+  .RightSlideMenu nav {
+    top: 10vmin;
+  }
+}
+
+.RightSlideMenu nav {
+  right: 0;
 }
 /*# sourceMappingURL=slidemenu.css.map */
