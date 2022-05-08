@@ -11,6 +11,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="/js/slide.js"></script>{{-- 余りよい方法では無いが他に手段がないので今はこれで  --}}
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -18,66 +19,62 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{ asset('css/slideMenu.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/header.css') }}">
 </head>
+
 <body>
+    <header>
+        <button class="LeftSlideMenuBtn m-1" id="LeftSlideMenuBtn">メニュー</button>
+        <p class="text-center fs-5 m-2 roomName">部屋の名前</p>
+        <div class="myRoomIconContena" id="RightSlideMenuBtn" >
+            <button>
+                @if (empty($imgUrl))
+                {{-- dummy_profile --}}
+                    <img class="myRoomIcon p-0" src="{{ asset('img/dummy_profile.png') }}">
+                @else
+                    <img class="myRoomIcon p-0"  src="{{ asset("img/<?= "$imgUrl" ?>") }}">{{-- かなり強引な書き方になった --}}
+                @endif
+            </button>
+        </div>
+    </header>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+        <div class="LeftSlideMenu">
+            <nav id="LeftSlideMenuNav">
+                <ul class="p-0">
+                  <li><a href="#">ホーム</a></li>
+                  <li><a href="#">サービス概要</a></li>
+                  <li><a href="#">実績紹介</a></li>
+                  <li><a href="#">お問い合わせ</a></li>
+                </ul>
+                <button class="d-flex align-items-end mx-auto">部屋を作る</button>
+            </nav>
+        </div>
+        <div class="RightSlideMenu">
+            <nav id="RightSlideMenuNav">
+                <ul class="p-0">
+                    <li><a href="/myRoom">マイルーム</a></li>
+                    <li>
+                        <a class="dropdown-item p-0" href="{{ route('logout') }}"
+                        onclick="event.preventDefault();
+                                      document.getElementById('logout-form').submit();">
+                        {{ __('Logout') }}
+                        </a>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav me-auto">
-
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ms-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            @if (Route::has('login'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                </li>
-                            @endif
-
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
-                    </ul>
-                </div>
-            </div>
-        </nav>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                         @csrf
+                    </form>
+                    </li>
+                </ul>
+                <button class="d-flex align-items-end mx-auto">部屋を作る</button>
+            </nav>
+        </div>
 
         <main class="py-4">
             @yield('content')
         </main>
     </div>
 </body>
+
 </html>
