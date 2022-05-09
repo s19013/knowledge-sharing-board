@@ -19,6 +19,9 @@ return new class extends Migration
             // 外部キー成約
             $table->foreign('room_id')->references('id')->on('rooms');
             $table->foreign('member_id')->references('id')->on('users');
+
+            //インデックス
+            $table->index('room_id');
         });
     }
 
