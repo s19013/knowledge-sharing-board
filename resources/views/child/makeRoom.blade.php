@@ -1,5 +1,7 @@
 @extends('layouts.app')
-
+@section('css')
+{{-- <link rel="stylesheet" href="{{ asset('css/myRoom.css') }}"> --}}
+@endsection
 @section('content')
 <div class="container">
     <form action="{{route('makeRoom')}}" method="POST">
