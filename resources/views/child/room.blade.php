@@ -5,6 +5,9 @@
 --}}
 @extends('layouts.app')
 
+@section('js')
+@endsection
+
 @section('css')
 {{-- <link rel="stylesheet" href="{{ asset('css/myRoom.css') }}"> --}}
 @endsection
