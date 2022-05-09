@@ -48,11 +48,11 @@ class HomeController extends Controller
         DB::transaction(function() use($posts){
             // roomDBにデータを登録.
             $roomId = Room::insertGetId(['owner_id' => \Auth::id(),'name' => $posts['roomName'],'public'=>1]);
-            RoomMember::insert(['room_id' => $roomId,'member_id' => \Auth::id(),]);
+            RoomMember::insert(['room_id' => $roomId,'member_id' => \Auth::id()]);
 
         });
-        // 実際に画面に移動するがいまはテスト
-        return view('child/myRoom',compact('roomName'));
+        // 実際に画面に移動する
+        return $this->transitionToRoom();
     }
 
     public function transitionToMakeRoom()
@@ -74,6 +74,29 @@ class HomeController extends Controller
         } else {
             $this->myRoom();
         }
+    }
+
+    public function transitionToMakeLinkCard(Request $request)
+    {
+        $posts=$request->all();
+        $roomId=$posts['roomId'];
+        $roomName ='リンクカード作成';
+        return view('child/makeLinkCard',compact('roomName','roomId'));
+    }
+
+    public function makeLinkCard(Request $request)
+    {
+        $posts=$request->all();
+        DB::transaction(function() use($posts){
+            // roomDBにデータを登録.
+            LinkCard::insert(['user_id' => \Auth::id(),
+            'room_id' => $posts['roomId'],
+            'title'=>$posts['title'],
+            'comment'=>$posts['comment'],
+            'url'=>$posts['url']]);
+        });
+
+        return $this->transitionToRoom($posts['roomId']);
     }
 }
 
