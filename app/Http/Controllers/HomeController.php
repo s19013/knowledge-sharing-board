@@ -36,43 +36,38 @@ class HomeController extends Controller
         return view('child/myRoom',compact('imgUrl','roomName','roomsUserBelongTo'));
     }
 
-    public function makeRoom(Request $request)
-    {
-        // 送られた値を受け取る
-        // roomDBにデータを登録
-        // roomMemberにもデータを登録
-        // 作った画面に遷移 リンクカードを見せる画面とか
-        $posts=$request->all();
-        $roomName = '';
-
-        DB::transaction(function() use($posts){
-            // roomDBにデータを登録.
-            $roomId = Room::insertGetId(['owner_id' => \Auth::id(),'name' => $posts['roomName'],'public'=>1]);
-            RoomMember::insert(['room_id' => $roomId,'member_id' => \Auth::id()]);
-
-        });
-        // 実際に画面に移動する
-        return $this->transitionToRoom();
-    }
-
     public function transitionToMakeRoom()
     {
         $roomName = '部屋作成';
         return view('child/makeRoom',compact('roomName'));
     }
 
+    public function makeRoom(Request $request)
+    {
+        $posts=$request->all();
+        $roomId = '';
+
+        $roomId = DB::transaction(function() use($posts){
+            // roomDBにデータを登録.
+            $roomId = Room::insertGetId(['owner_id' => \Auth::id(),'name' => $posts['roomName'],'public'=>1]);
+            RoomMember::insert(['room_id' => $roomId,'member_id' => \Auth::id()]);
+            return $roomId;
+
+        });
+        // 実際に画面に移動する
+        return $this->transitionToRoom($roomId);
+    }
 
     public function transitionToRoom($roomId)
     {
-        // メンバーかどうか確かめる
-        if (checkIsHeMember(\Auth::id(),$roomId)) {
-            $linkCards = LinkCard::select('title','comment','url')
-            ->where('room_id','=',$roomId)
-            ->get();
-            $roomName = getRoomsName($roomId);
-            return view('child/room',compact('roomName','roomId','linkCards'));
-        } else {
-            $this->myRoom();
+        $roomName = getRoomsName($roomId);
+        $linkCards = getLinkCards($roomId);
+        //公開かどうか確かめる
+        if (isRoomPublic($roomId)) {return view('child/room',compact('roomName','roomId','linkCards'));}
+        else {
+            // メンバーかどうか確かめる
+            if (checkIsHeMember(\Auth::id(),$roomId)) {return view('child/room',compact('roomName','roomId','linkCards'));}
+            else {return $this->myRoom();}
         }
     }
 
@@ -98,6 +93,34 @@ class HomeController extends Controller
 
         return $this->transitionToRoom($posts['roomId']);
     }
+
+    public function transitionToSerachRoom()
+    {
+        $roomName = '部屋を探す';
+        // 部屋を100件とってくる
+        $rooms = User::select('users.name AS owner','rooms.name AS name')//コメントも追加
+        ->join('rooms','users.id','=','rooms.owner_id')
+        ->limit(100)
+        ->get();
+
+
+        return view('child/searchRoom',compact('roomName','rooms'));
+    }
+}
+function getLinkCards($roomId)
+{
+    return LinkCard::select('title','comment','url')
+            ->where('room_id','=',$roomId)
+            ->get();
+}
+
+function isRoomPublic($roomId)
+{
+    $public = Room::select('public')
+            ->where('id','=',$roomId)
+            ->first();
+    if ($public['public'] == 1) {return true;}
+    else {return false;}
 }
 
 function getRoomsName($roomId)
