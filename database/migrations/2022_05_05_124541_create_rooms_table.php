@@ -16,7 +16,8 @@ return new class extends Migration
         Schema::create('rooms', function (Blueprint $table) {
             $table->unsignedBigInteger('id',true);
             $table->unsignedBigInteger('owner_id');
-            $table->string('name');
+            $table->string('name',50);
+            $table->string('comment',100)->nullable();
             $table->integer('public')->default(1);//booleanが上手く使えないので true:1 falses:0として使う
 
             $table->softDeletes();
