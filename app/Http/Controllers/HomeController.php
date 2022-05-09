@@ -94,19 +94,36 @@ class HomeController extends Controller
         return $this->transitionToRoom($posts['roomId']);
     }
 
-    public function transitionToSerachRoom()
+    public function searchRoom()
     {
         $roomName = '部屋を探す';
-        // 部屋を100件とってくる
-        $rooms = User::select('users.name AS owner','rooms.name AS name')//コメントも追加
+        $searchName =\Request::query('searchName');
+        $serchQuery = User::query()
+        ->select('users.name AS owner','rooms.name AS name')
         ->join('rooms','users.id','=','rooms.owner_id')
-        ->limit(100)
-        ->get();
+        ->limit(100);
 
+        if (!empty($searchName)) {
+            //借りてきたもの
+            // 全角スペースを半角に変換
+            $spaceConversion = mb_convert_kana($searchName, 's');
+
+            // 単語を半角スペースで区切り、配列にする（例："山田 翔" → ["山田", "翔"]）
+            $wordArraySearched = preg_split('/[\s,]+/', $spaceConversion, -1, PREG_SPLIT_NO_EMPTY);
+
+            // 単語をループで回し、ユーザーネームと部分一致するものがあれば、$queryとして保持される
+            foreach($wordArraySearched as $value) {
+                $serchQuery->where('rooms.name', 'like', '%'.$value.'%');
+            }
+        }
+
+        $rooms = $serchQuery->get();
 
         return view('child/searchRoom',compact('roomName','rooms'));
     }
+
 }
+
 function getLinkCards($roomId)
 {
     return LinkCard::select('title','comment','url')
