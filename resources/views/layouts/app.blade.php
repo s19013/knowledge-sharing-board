@@ -12,6 +12,7 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="/js/slide.js"></script>{{-- 余りよい方法では無いが他に手段がないので今はこれで  --}}
+    @yield('js')
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -22,6 +23,7 @@
 
     <link rel="stylesheet" href="{{ asset('css/slideMenu.css') }}">
     <link rel="stylesheet" href="{{ asset('css/header.css') }}">
+    @yield('css')
 </head>
 
 <body>
@@ -39,7 +41,7 @@
                 </nav>
             </div>
 
-        <p class="text-center fs-5 m-2 roomName">部屋の名前</p>
+        <p class="text-center fs-5 m-2 roomName">{{$roomName}}</p>
 
         <div class="myRoomIconContena" id="RightSlideMenuBtn" >
             <button>
@@ -73,7 +75,6 @@
 
     </header>
     <div id="app">
-
         <main class="py-4">
             @yield('content')
         </main>
