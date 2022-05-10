@@ -9,11 +9,10 @@
 @section('content')
 <div class="container">
     <form action="{{route('makeRoom')}}" method="POST">
-        {{-- 名前,公開非公開 --}}
-        {{-- makeRoomの関数へ --}}
-        {{-- roomNameは必ず埋める --}}
         @csrf
-        <input type="text" name="roomName" required>
+        <input type="text" name="roomName" minlength='2' maxlength='50' required>
+        {{-- <input type="text" name="comment" maxlength='100' required> --}}
+        {{-- 公開非公開のラジオボタン --}}
         <input type="submit" value="作成" class="submitBtn">
     </form>
 </div>
