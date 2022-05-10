@@ -20,12 +20,30 @@
         <button type="button" class="searchRoomBtn btn btn-primary col-3" onclick="location.href='{{route('searchRoom')}}'">部屋を探す</button>
     </div>
 
-    @foreach ($roomsUserBelongTo as $rooms)
+    <h3>所属している部屋</h3>
+    {{-- ここ孫bladeとかでまとめられないかな? --}}
+    <div class="roomContainer border border-dark">
+        @foreach ($roomsUserBelongTo as $room)
+            <div class="room m-1 border border-dark">
+                <div class="Card border-end border-dark m-0">
+                    <div class="cardHeader fs-4 font-weight-bold">
+                        <p class="name m-0">{{$room['name']}}</p>
+                    </div>
+                    <div class="cardBody">
+                        <p class="owner border-bottom m-0">{{$room['owner']}}</p>
+                        <p class="comment m-0">コメント</p>
+                    </div>
+                </div>
+                <button onclick="location.href='/room/{{$room['room_id']}}'">部屋に入る</button>
+            </div>
+        @endforeach
+    </div>
+    {{-- @foreach ($roomsUserBelongTo as $rooms)
     <div class="roomsContena">
         <p>{{$rooms['name']}}</p>
         <button onclick="location.href='/room/{{$rooms['room_id']}}'">部屋に入る</button>
     </div>
 
-    @endforeach
+    @endforeach --}}
 </div>
 @endsection
