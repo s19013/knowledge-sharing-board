@@ -1,16 +1,16 @@
 @extends('layouts.app')
 
 @section('js')
-@endsection
 <script>
-window.addEventListener('load', function(){
-    const $input=document.getElementById('roomNameInput');
-    const $wordCount = document.getElementById('roomNameWordCount');
-    $input.addEventListener('keyup', function () {
-        $wordCount.textContent = `残り${50 - $input.value.length}文字`;
-    })
-});
-</script>
+    window.addEventListener('load', function(){
+        const $input=document.getElementById('roomNameInput');
+        const $wordCount = document.getElementById('roomNameWordCount');
+        $input.addEventListener('keyup', function () {
+            $wordCount.textContent = `残り${50 - $input.value.length}文字`;
+        })
+    });
+    </script>
+@endsection
 @section('css')
 {{-- <link rel="stylesheet" href="{{ asset('css/myRoom.css') }}"> --}}
 @endsection

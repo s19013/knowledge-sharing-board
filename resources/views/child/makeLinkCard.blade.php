@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('js')
-@endsection
 <script>
 window.addEventListener('load', function(){
     const $input = document.getElementById('titleInput');
@@ -18,6 +17,7 @@ window.addEventListener('load', function(){
     })
 });
 </script>
+@endsection
 @section('css')
 <link rel="stylesheet" href="{{ asset('css/makeLinkCard.css') }}">
 @endsection
