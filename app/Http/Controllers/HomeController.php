@@ -99,7 +99,7 @@ class HomeController extends Controller
         $roomName = '部屋を探す';
         $searchName =\Request::query('searchName');
         $serchQuery = User::query()
-        ->select('users.name AS owner','rooms.name AS name')
+        ->select('users.name AS owner','rooms.name AS name','rooms.id as room_id')
         ->join('rooms','users.id','=','rooms.owner_id')
         ->limit(100);
 
