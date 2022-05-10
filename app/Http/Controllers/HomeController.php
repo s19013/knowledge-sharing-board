@@ -99,7 +99,7 @@ class HomeController extends Controller
         $roomName = '部屋を探す';
         $searchName =\Request::query('searchName');
         $serchQuery = User::query()
-        ->select('users.name AS owner','rooms.name AS name','rooms.id as room_id')
+        ->select('users.name AS ownerName','rooms.name AS roomName','rooms.id as room_id')
         ->join('rooms','users.id','=','rooms.owner_id')
         ->limit(100);
 
@@ -156,8 +156,9 @@ function checkIsHeMember($userId,$roomId)
 }
 
 function findGroupsUserBelongto(){
-        return RoomMember::select('room_id','name')
+        return RoomMember::select('room_id','rooms.name as roomName','users.name as ownerName')
         ->join('rooms','rooms.id','=','room_id')
+        ->join('users','users.id','=','rooms.owner_id')
         ->Where('member_id','=',\Auth::id())
         ->WhereNull('rooms.deleted_at')
         ->get();
