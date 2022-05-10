@@ -21,7 +21,7 @@
                         <p class="name m-0">{{$room['roomName']}}</p>
                     </div>
                     <div class="cardBody">
-                        <p class="owner border-bottom m-0">{{$room['ownerName']}}</p>
+                        <p class="owner border-bottom m-0">部屋主:{{$room['ownerName']}}</p>
                         <p class="comment m-0">コメント</p>
                     </div>
                 </div>
