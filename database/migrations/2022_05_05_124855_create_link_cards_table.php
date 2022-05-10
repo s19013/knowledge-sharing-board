@@ -18,7 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('room_id');
             $table->string('title',90);
-            $table->string('comment',190)->nullable();
+            $table->string('comment',180)->nullable();
             $table->longText('url');
 
             $table->softDeletes();
