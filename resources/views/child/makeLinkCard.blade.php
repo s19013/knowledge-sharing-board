@@ -3,13 +3,18 @@
 @section('js')
 @endsection
 <script>
-    window.addEventListener('load', function(){
-    document.getElementById('titleInput').addEventListener('keyup', function () {
-        document.getElementById('titleWordCount').textContent = `残り${90 - document.getElementById('titleInput').value.length}文字`;
+window.addEventListener('load', function(){
+    const $input = document.getElementById('titleInput');
+    const $wordCount = document.getElementById('titleWordCount')
+    $input.addEventListener('keyup', function () {
+        $wordCount.textContent = `残り${90 - $input.value.length}文字`;
     })
-
-    document.getElementById('commentInput').addEventListener('keyup', function () {
-        document.getElementById('commentWordCount').textContent = `残り${180 - document.getElementById('commentInput').value.length}文字`;
+});
+window.addEventListener('load', function(){
+    const $input=document.getElementById('commentInput');
+    const $wordCount = document.getElementById('commentWordCount')
+    $input.addEventListener('keyup', function () {
+        $wordCount.textContent = `残り${180 - $input.value.length}文字`;
     })
 });
 </script>
