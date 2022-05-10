@@ -27,10 +27,10 @@
             <div class="room m-1 border border-dark">
                 <div class="Card border-end border-dark m-0">
                     <div class="cardHeader fs-4 font-weight-bold">
-                        <p class="name m-0">{{$room['name']}}</p>
+                        <p class="name m-0">{{$room['roomName']}}</p>
                     </div>
                     <div class="cardBody">
-                        <p class="owner border-bottom m-0">{{$room['owner']}}</p>
+                        <p class="owner border-bottom m-0">{{$room['ownerName']}}</p>
                         <p class="comment m-0">コメント</p>
                     </div>
                 </div>
