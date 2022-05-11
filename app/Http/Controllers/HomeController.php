@@ -52,8 +52,9 @@ class HomeController extends Controller
             $roomId = Room::insertGetId(['owner_id' => \Auth::id(),'name' => $posts['roomName'],'public'=>1]);
             RoomMember::insert(['room_id' => $roomId,'member_id' => \Auth::id()]);
             return $roomId;
-
         });
+        // 二重送信防止になるらしい
+        $request->session()->regenerateToken();
         // 実際に画面に移動する
         return $this->transitionToRoom($roomId);
     }
@@ -82,14 +83,16 @@ class HomeController extends Controller
     public function makeLinkCard(Request $request)
     {
         $posts=$request->all();
-        DB::transaction(function() use($posts){
+            DB::transaction(function() use($posts){
             // roomDBにデータを登録.
             LinkCard::insert(['user_id' => \Auth::id(),
             'room_id' => $posts['roomId'],
             'title'=>$posts['title'],
             'comment'=>$posts['comment'],
             'url'=>$posts['url']]);
-        });
+            });
+        // 二重送信防止になるらしい
+        $request->session()->regenerateToken();
 
         return $this->transitionToRoom($posts['roomId']);
     }
