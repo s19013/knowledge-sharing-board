@@ -18,9 +18,11 @@ window.addEventListener('load', function(){
 });
 </script>
 @endsection
+
 @section('css')
 <link rel="stylesheet" href="{{ asset('css/makeLinkCard.css') }}">
 @endsection
+
 @section('content')
 <div class="container">
     <form action="{{route('makeLinkCard')}}" method="POST">
