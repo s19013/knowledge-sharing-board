@@ -17,8 +17,8 @@
 @section('content')
 <div class="container">
     <form action="{{route('makeRoom')}}" method="POST">
+        @csrf
         <div class='formBlock'>
-            @csrf
             <h2>部屋の名前 <span class="fs-6 text-danger">[必須]</span></h2>
             <input type="text" id="roomNameInput" class="w-100 mt-2" name="roomName" placeholder="例: 〇〇の勉強方法" minlength='2' maxlength='50' required>
             <p class="counter" id="roomNameWordCount">残り50文字</p>
