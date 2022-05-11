@@ -21,6 +21,9 @@ class HomeController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+
+        // グローバル変数とかでデータを一時保存とかしたほうがいい気がする
+        $this->imgUrl = null;
     }
 
     /**
@@ -31,9 +34,10 @@ class HomeController extends Controller
 
     public function myRoom(){
         $roomsUserBelongTo = findGroupsUserBelongto();
-        $imgUrl= getImgUrl(\Auth::id());
+        $this->imgUrl= getImgUrl(\Auth::id());
         $roomName = 'MY ROOM';
-        return view('child/myRoom',compact('imgUrl','roomName','roomsUserBelongTo'));
+        return view('child/myRoom',compact('roomName','roomsUserBelongTo'))
+        ->with('imgUrl',$this->imgUrl);
     }
 
     public function transitionToMakeRoom()
@@ -56,7 +60,7 @@ class HomeController extends Controller
         // 二重送信防止になるらしい
         $request->session()->regenerateToken();
         // 実際に画面に移動する
-        return $this->transitionToRoom($roomId);
+        return redirect()->route('transitionToRoom', ['roomId' => $posts['roomId']]);
     }
 
     public function transitionToRoom($roomId)
@@ -83,18 +87,19 @@ class HomeController extends Controller
     public function makeLinkCard(Request $request)
     {
         $posts=$request->all();
-            DB::transaction(function() use($posts){
+        DB::transaction(function() use($posts){
             // roomDBにデータを登録.
             LinkCard::insert(['user_id' => \Auth::id(),
             'room_id' => $posts['roomId'],
             'title'=>$posts['title'],
             'comment'=>$posts['comment'],
             'url'=>$posts['url']]);
-            });
+        });
         // 二重送信防止になるらしい
         $request->session()->regenerateToken();
 
-        return $this->transitionToRoom($posts['roomId']);
+        //リダイレクトをすればリロードしても二重登録されないし419エラーもでない!
+        return redirect()->route('transitionToRoom', ['roomId' => $posts['roomId']]);
     }
 
     public function searchRoom()
