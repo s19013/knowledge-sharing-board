@@ -1,0 +1,26 @@
+a {
+  text-decoration: none;
+  color: black;
+}
+
+.card {
+  margin: 1vmin;
+}
+
+@media screen and (min-width: 768px) {
+  .container {
+    max-width: 90%;
+  }
+  .container .bord {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+  }
+  .container .bord .card {
+    width: auto;
+    max-width: 55vmin;
+  }
+}
+/*# sourceMappingURL=room.css.map */

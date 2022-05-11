@@ -1,15 +1,10 @@
-{{--
-    使える変数
-    $roomID
-    $linkCards
---}}
 @extends('layouts.app')
 
 @section('js')
 @endsection
 
 @section('css')
-{{-- <link rel="stylesheet" href="{{ asset('css/myRoom.css') }}"> --}}
+<link rel="stylesheet" href="{{ asset('css/room.css') }}">
 @endsection
 
 @section('content')
@@ -17,9 +12,9 @@
     <form action="{{route('transitionToMakeLinkCard')}}" method="POST">
         @csrf
         <input type="hidden" name="roomId" value='{{$roomId}}'>
-        <input type="submit" value="リンクカード作成" class="btn btn-primary">
+        <input type="submit" value="リンクカード作成" class="btn btn-primary mb-2">
     </form>
-    <div class="bord">
+    <div class="bord border border-dark">
         @foreach ($linkCards as $card)
         <a href="{{$card['url']}}">
             <div class="card">
