@@ -23,6 +23,7 @@
 
     <link rel="stylesheet" href="{{ asset('css/slideMenu.css') }}">
     <link rel="stylesheet" href="{{ asset('css/header.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/loading.css') }}">
     @yield('css')
 </head>
 
@@ -41,7 +42,7 @@
                 </nav>
             </div>
 
-        <p class="text-center fs-5 m-2 roomName">{{$roomName}}</p>
+        <p class="text-center m-2 roomName">{{$roomName}}</p>
 
         <div class="myRoomIconContena" id="RightSlideMenuBtn" >
             <button>
@@ -76,9 +77,12 @@
     </header>
     <div id="app">
         <main class="py-4">
+            <div id="loading">
+                <div class="spinner"></div>
+            </div>
             @yield('content')
         </main>
     </div>
 </body>
-
+<script src="{{ asset('js/loading.js') }}"></script>{{-- ここに書かないとバグる? --}}
 </html>
