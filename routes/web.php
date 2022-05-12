@@ -18,7 +18,7 @@ Auth::routes();
 // post通信のときはRoute::post
 Route::get('/', [App\Http\Controllers\HomeController::class, 'myRoom'])->name('index');
 Route::get('/myRoom', [App\Http\Controllers\HomeController::class, 'myRoom'])->name('myRoom');
-Route::get('/room/{roomId}', [App\Http\Controllers\HomeController::class, 'transitionToRoom'])->name('transitionToRoom');
+Route::get('/room', [App\Http\Controllers\HomeController::class, 'transitionToRoom'])->name('transitionToRoom');
 
 Route::get('/transitionToMakeRoom', [App\Http\Controllers\HomeController::class, 'transitionToMakeRoom'])->name('transitionToMakeRoom');
 Route::post('/makeRoom', [App\Http\Controllers\HomeController::class, 'makeRoom'])->name('makeRoom');
