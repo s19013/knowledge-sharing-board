@@ -34,16 +34,14 @@
                         <p class="comment m-0">コメント</p>
                     </div>
                 </div>
-                <button onclick="location.href='/room/{{$room['room_id']}}'">部屋に入る</button>
+                <button onclick="location.href='/room?roomId={{$room['room_id']}}&page=1'" >部屋に入る</button>
             </div>
         @endforeach
     </div>
-    {{-- @foreach ($roomsUserBelongTo as $rooms)
-    <div class="roomsContena">
-        <p>{{$rooms['name']}}</p>
-        <button onclick="location.href='/room/{{$rooms['room_id']}}'">部屋に入る</button>
-    </div>
+    <footer>
+        {{$roomsUserBelongTo->links()}}
 
-    @endforeach --}}
+        {{-- appends(['roomId'=> $roomId]) --}}
+    </footer>
 </div>
 @endsection
