@@ -20,7 +20,7 @@
         @csrf
         <div class='formBlock'>
             <h2>部屋の名前 <span class="fs-6 text-danger">[必須]</span></h2>
-            <input type="text" id="roomNameInput" class="w-100 mt-2" name="roomName" placeholder="例: 〇〇の勉強方法" minlength='2' maxlength='50' required>
+            <input type="text" id="roomNameInput" class="w-100 mt-2" name="roomName" placeholder="例: 〇〇の勉強方法" minlength='2' maxlength='50' required autofocus>
             <p class="counter" id="roomNameWordCount">残り50文字</p>
             {{-- <input type="text" name="comment" maxlength='100' required> --}}
             {{-- 公開非公開のラジオボタン --}}
