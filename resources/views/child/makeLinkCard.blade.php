@@ -39,7 +39,7 @@ window.addEventListener('load', function(){
         </div>
         <div class="formBlock">
             <h2>コメント</h2>
-            <textarea name="comment" id="commentInput" cols="90" rows="2" maxlength='180' autofocus></textarea>
+            <textarea name="comment" id="commentInput" class="w-100" rows="2" maxlength='180' autofocus></textarea>
             <p class="counter" id="commentWordCount">残り180文字</p>
         </div>
         <input type="submit" value="作成" class="submitBtn">
