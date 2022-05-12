@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Pagination\Paginator;
 use App\Models\LinkCard;
 use App\Models\Room;
 use App\Models\RoomMember;
@@ -63,15 +64,18 @@ class HomeController extends Controller
         return redirect()->route('transitionToRoom', ['roomId' => $posts['roomId']]);
     }
 
-    public function transitionToRoom($roomId)
+    public function transitionToRoom()
     {
+        $roomId =\Request::query('roomId');
         $roomName = getRoomsName($roomId);
+        // dd($pageCount);
         $linkCards = getLinkCards($roomId);
         //公開かどうか確かめる
+        // if (isRoomPublic($roomId)) {return view('child/room',compact('roomName','roomId','linkCards','pageCount'));}
         if (isRoomPublic($roomId)) {return view('child/room',compact('roomName','roomId','linkCards'));}
         else {
             // メンバーかどうか確かめる
-            if (checkIsHeMember(\Auth::id(),$roomId)) {return view('child/room',compact('roomName','roomId','linkCards'));}
+            if (checkIsHeMember(\Auth::id(),$roomId)) {return view('child/room',compact('roomName','roomId','linkCards','pageCount'));}
             else {return $this->myRoom();}
         }
     }
@@ -108,8 +112,7 @@ class HomeController extends Controller
         $searchName =\Request::query('searchName');
         $serchQuery = User::query()
         ->select('users.name AS ownerName','rooms.name AS roomName','rooms.id as room_id')
-        ->join('rooms','users.id','=','rooms.owner_id')
-        ->limit(100);
+        ->join('rooms','users.id','=','rooms.owner_id');
 
         if (!empty($searchName)) {
             //借りてきたもの
@@ -125,7 +128,7 @@ class HomeController extends Controller
             }
         }
 
-        $rooms = $serchQuery->get();
+        $rooms = $serchQuery->paginate(2);
 
         return view('child/searchRoom',compact('roomName','rooms'));
     }
@@ -136,7 +139,7 @@ function getLinkCards($roomId)
 {
     return LinkCard::select('title','comment','url')
             ->where('room_id','=',$roomId)
-            ->get();
+            ->paginate(5);
 }
 
 function isRoomPublic($roomId)
@@ -169,7 +172,7 @@ function findGroupsUserBelongto(){
         ->join('users','users.id','=','rooms.owner_id')
         ->Where('member_id','=',\Auth::id())
         ->WhereNull('rooms.deleted_at')
-        ->get();
+        ->paginate(5);
 }
 
 function getImgUrl($userId){
