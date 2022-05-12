@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('js')
+
 @endsection
 
 @section('css')
@@ -26,5 +27,8 @@
         </a>
         @endforeach
     </div>
+    <footer>
+        {{$linkCards->appends(['roomId'=> $roomId])->links()}}
+    </footer>
 </div>
 @endsection
