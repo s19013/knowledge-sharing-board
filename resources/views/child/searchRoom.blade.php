@@ -29,7 +29,7 @@
             </div>
         @endforeach
     </div>
-    <footer class="mt-2">
+    <footer >
         {{$rooms->appends(['searchName'=> \Request::query('searchName')])->links()}}
     </footer>
 </div>

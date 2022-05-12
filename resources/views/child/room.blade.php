@@ -27,7 +27,7 @@
         </a>
         @endforeach
     </div>
-    <footer class="mt-2">
+    <footer>
         {{$linkCards->appends(['roomId'=> $roomId])->links()}}
     </footer>
 </div>

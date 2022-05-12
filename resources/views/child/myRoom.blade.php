@@ -12,7 +12,7 @@
         @if (empty($userInf['imgUrl']))
             <img class="profileImg" src="{{ asset('img/dummy_profile.png') }}" alt="">
         @endif
-        <p class="m-0 fs-2">{{ Auth::user()->name }}</p>
+        <p class="m-0">{{ Auth::user()->name }}</p>
     </div>
 
     <h3>所属している部屋</h3>
@@ -33,7 +33,7 @@
             </div>
         @endforeach
     </div>
-    <footer class="mt-2">
+    <footer>
         {{$roomsUserBelongTo->links()}}
     </footer>
 </div>
