@@ -25,6 +25,11 @@
 }
 
 .userInfBox p {
+  -ms-grid-column: 4;
+  -ms-grid-column-span: 8;
+  grid-column: 4/12;
+  -ms-grid-row: 1;
+  grid-row: 1;
   border: 1px solid #999;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -36,11 +41,7 @@
       -ms-flex-pack: center;
           justify-content: center;
   width: 100%;
-  -ms-grid-column: 4;
-  -ms-grid-column-span: 7;
-  grid-column: 4/11;
-  -ms-grid-row: 1;
-  grid-row: 1;
+  font-size: 3vmin;
 }
 
 h3 {
@@ -101,5 +102,11 @@ h3 {
   margin: 1vmin;
   padding: 0;
   font-size: 2vmin;
+}
+
+@media screen and (max-width: 500px) {
+  .userInfBox p {
+    font-size: 2vmin;
+  }
 }
 /*# sourceMappingURL=myRoom.css.map */
