@@ -25,9 +25,12 @@
                         <p class="comment m-0">コメント</p>
                     </div>
                 </div>
-                <button onclick="location.href='/room/{{$room['room_id']}}'">部屋に入る</button>
+                <button onclick="location.href='/room?roomId={{$room['room_id']}}&page=1'">部屋に入る</button>
             </div>
         @endforeach
     </div>
+    <footer>
+        {{$rooms->appends(['searchName'=> \Request::query('searchName')])->links()}}
+    </footer>
 </div>
 @endsection
