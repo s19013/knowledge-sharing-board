@@ -29,7 +29,7 @@
 
 <body>
     <header>
-        <p class="text-center m-2 roomName">{{$roomName}}</p>
+        <p class="text-center roomName">{{$roomName}}</p>
 
         <div class="myRoomIconContena" id="RightSlideMenuBtn" >
             <button>
