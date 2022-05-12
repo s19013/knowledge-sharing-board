@@ -1,3 +1,6 @@
+.container{
+    max-width: 180vmin;
+}
 .userInfBox{
     display: grid;
     grid-template-columns: 5% 10% 10% 10% 10% 10% 10% 10% 10% 10% 5%;
@@ -23,11 +26,10 @@
     }
 }
 
-.ButtonsContena{
-    margin: 3vmin 0;
-    height: 5vmin;
+h3{
+    font-size: 5vmin;
+    margin: 2vmin;
 }
-
 .roomContainer{
     margin-top: 3vmin;
     .room{

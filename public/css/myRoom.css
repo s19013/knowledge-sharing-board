@@ -1,3 +1,7 @@
+.container {
+  max-width: 180vmin;
+}
+
 .userInfBox {
   display: -ms-grid;
   display: grid;
@@ -39,9 +43,9 @@
   grid-row: 1;
 }
 
-.ButtonsContena {
-  margin: 3vmin 0;
-  height: 5vmin;
+h3 {
+  font-size: 5vmin;
+  margin: 2vmin;
 }
 
 .roomContainer {
