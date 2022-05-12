@@ -1,10 +1,9 @@
 .RightSlideMenu{
-
       /* メニュー */
       nav {
         background: #0bd;
         position: absolute;
-        z-index: 1;//これで一つ前のレイヤーへ
+        z-index: 10;//これで10前のレイヤーへ
         right: 0; //初期の位置
         top:6vmin;
         overflow-x: hidden;
@@ -39,6 +38,17 @@
       @media screen and (max-width:768px) {
         nav{
             top:10vmin;
+            li {
+                margin: 10vmin 0;
+                list-style:none;
+                &:hover{
+                    background-color: rgb(240, 240, 240);
+                }
+            }
+
+            &.open-menu {
+                width: 100vmin;
+            }
         }
     }
 }
