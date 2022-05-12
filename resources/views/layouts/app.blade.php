@@ -29,19 +29,6 @@
 
 <body>
     <header>
-        <button class="LeftSlideMenuBtn m-1" id="LeftSlideMenuBtn">メニュー</button>
-            <div class="LeftSlideMenu">
-                <nav id="LeftSlideMenuNav">
-                    <ul class="p-0">
-                      <li><a href="#">ホーム</a></li>
-                      <li><a href="#">サービス概要</a></li>
-                      <li><a href="#">実績紹介</a></li>
-                      <li><a href="#">お問い合わせ</a></li>
-                    </ul>
-                    <button class="d-flex align-items-end mx-auto">部屋を作る</button>
-                </nav>
-            </div>
-
         <p class="text-center m-2 roomName">{{$roomName}}</p>
 
         <div class="myRoomIconContena" id="RightSlideMenuBtn" >
@@ -57,7 +44,9 @@
             <div class="RightSlideMenu">
                 <nav id="RightSlideMenuNav">
                     <ul class="p-0">
-                        <li><a href="/myRoom">マイルーム</a></li>
+                        <li><a href="{{route('myRoom')}}">マイルーム</a></li>
+                        <li><a href="{{route('transitionToMakeRoom')}}">部屋を作る</a></li>
+                        <li><a href="{{route('searchRoom')}}">部屋を探す</a></li>
                         <li>
                             <a class="dropdown-item p-0" href="{{ route('logout') }}"
                             onclick="event.preventDefault();
@@ -70,7 +59,6 @@
                             </form>
                         </li>
                     </ul>
-                    <button class="d-flex align-items-end mx-auto">部屋を作る</button>
                 </nav>
             </div>
 
