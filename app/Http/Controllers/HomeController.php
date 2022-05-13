@@ -22,12 +22,6 @@ class HomeController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-
-        $this->userModel = new User;
-        $this->roomModel = new Room;
-        $this->roomMemberModel = new RoomMember;
-        $this->linkCardModel = new LinkCard;
-
         // グローバル変数とかでデータを一時保存とかしたほうがいい気がする
         $this->imgUrl = null;
     }
@@ -39,8 +33,8 @@ class HomeController extends Controller
      */
 
     public function myRoom(){
-        $rooms = $this->roomMemberModel->findRoomsUserBelongto(\Auth::id());
-        $this->imgUrl= $this->userModel->getImgUrl(\Auth::id());
+        $rooms = RoomMember::findRoomsUserBelongTo(\Auth::id());
+        $this->imgUrl= User::getImgUrl(\Auth::id());
 
         return view('child/myRoom',compact('rooms'))
         ->with('roomName','マイルーム')
@@ -58,10 +52,10 @@ class HomeController extends Controller
         $posts=$request->all();
 
         // 受け取ったデータをdbに登録してその部屋のIDを受け取る
-        $roomId = $this->roomModel->addRoomToDB($posts,\Auth::id());
+        $roomId = Room::addRoomToDB($posts,\Auth::id());
 
         //ユーザーを作った部屋のメンバーに加える
-        $this->roomMemberModel->joinMember(\Auth::id(),$roomId);
+        RoomMember::joinMember(\Auth::id(),$roomId);
 
         // 二重送信防止
         $request->session()->regenerateToken();
@@ -72,16 +66,16 @@ class HomeController extends Controller
     public function transitionToRoom()
     {
         $roomId =\Request::query('roomId');
-        $roomName = $this->roomModel->getRoomName($roomId);
-        $linkCards = $this->linkCardModel->getLinkCards($roomId);
+        $roomName = Room::getRoomName($roomId);
+        $linkCards = LinkCard::getLinkCards($roomId);
 
         // メンバーかどうか確かめる
-        if ($this->roomMemberModel->isHeMember(\Auth::id(),$roomId)) {return view('child/room',compact('roomName','roomId','linkCards'));}
+        if (RoomMember::isHeMember(\Auth::id(),$roomId)) {return view('child/room',compact('roomName','roomId','linkCards'));}
         else {
             //公開かどうか確かめる
-            if ($this->roomModel->isRoomPublic($roomId)) {
+            if (Room::isRoomPublic($roomId)) {
                 //メンバーに加える
-                $this->roomMemberModel->joinMember(\Auth::id(),$roomId);
+                RoomMember::joinMember(\Auth::id(),$roomId);
                 return view('child/room',compact('roomName','roomId','linkCards'));
             } else {
                 // 弾く
@@ -104,7 +98,7 @@ class HomeController extends Controller
     public function makeLinkCard(Request $request)
     {
         $posts=$request->all();
-        $this->linkCardModel->addCardToDB($posts);
+        LinkCardModel::addCardToDB($posts);
         // 二重送信防止になるらしい
         $request->session()->regenerateToken();
 
@@ -115,7 +109,7 @@ class HomeController extends Controller
     public function searchRoom()
     {
         $searchName =\Request::query('searchName');
-        $rooms = $this->roomModel->getRooms($searchName);
+        $rooms = Room::getRooms($searchName);
 
         return view('child/searchRoom',compact('rooms'))
         ->with('roomName','部屋を探す');
@@ -130,7 +124,7 @@ class HomeController extends Controller
     public function withdrawal()
     {
         // 論理削除
-        $this->userModel->deleteUser(Auth::id());
+        User::deleteUser(Auth::id());
         Auth::logout();
         return redirect(route('login'));
     }
