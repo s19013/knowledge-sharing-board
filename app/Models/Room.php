@@ -36,4 +36,24 @@ class Room extends Model
         return $roomName['name'];
     }
 
+    protected function getRooms($searchName)
+    {
+        $serchQuery = Room::query()
+        ->select('users.name AS ownerName','rooms.name AS roomName','rooms.id as room_id','rooms.comment as comment')
+        ->join('users','users.id','=','rooms.owner_id');
+
+        if (!empty($searchName)) {
+            // 全角スペースを半角に変換
+            $spaceConversion = mb_convert_kana($searchName, 's');
+
+            // 単語を半角スペースで区切り、配列にする（例："山田 翔" → ["山田", "翔"]）
+            $wordArraySearched = preg_split('/[\s,]+/', $spaceConversion, -1, PREG_SPLIT_NO_EMPTY);
+
+            // 単語をループで回し、ユーザーネームと部分一致するものがあれば、$queryとして保持される
+            foreach($wordArraySearched as $value) {
+                $serchQuery->where('rooms.name', 'like', '%'.$value.'%');
+            }
+        }
+        return $serchQuery->paginate(10);
+    }
 }
