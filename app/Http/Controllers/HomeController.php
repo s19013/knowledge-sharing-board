@@ -34,17 +34,17 @@ class HomeController extends Controller
      */
 
     public function myRoom(){
-        $roomsUserBelongTo = findGroupsUserBelongto();
+        $rooms = findRoomsUserBelongto(\Auth::id());
         $this->imgUrl= getImgUrl(\Auth::id());
-        $roomName = 'MY ROOM';
-        return view('child/myRoom',compact('roomName','roomsUserBelongTo'))
+        return view('child/myRoom',compact('roomsUserBelongTo'))
+        ->with('roomName','マイルーム')
         ->with('imgUrl',$this->imgUrl);
     }
 
     public function transitionToMakeRoom()
     {
-        $roomName = '部屋作成';
-        return view('child/makeRoom',compact('roomName'));
+        return view('child/makeRoom')
+        ->with('roomName','部屋作成');
     }
 
     public function makeRoom(Request $request)
@@ -55,12 +55,14 @@ class HomeController extends Controller
         $roomId = DB::transaction(function() use($posts){
             // roomDBにデータを登録.
             $roomId = Room::insertGetId(['owner_id' => \Auth::id(),'name' => $posts['roomName'],'public'=>1]);
-            RoomMember::insert(['room_id' => $roomId,'member_id' => \Auth::id()]);
             return $roomId;
         });
-        // 二重送信防止になるらしい
+
+        //ユーザーを作った部屋のメンバーに加える
+        joinMember(\Auth::id(),$roomId);
+        // 二重送信防止
         $request->session()->regenerateToken();
-        // 実際に画面に移動する
+
         return redirect()->route('transitionToRoom', ['roomId' => $roomId]);
     }
 
@@ -68,14 +70,21 @@ class HomeController extends Controller
     {
         $roomId =\Request::query('roomId');
         $roomName = getRoomsName($roomId);
-        // dd($pageCount);
         $linkCards = getLinkCards($roomId);
-        //公開かどうか確かめる
-        if (isRoomPublic($roomId)) {return view('child/room',compact('roomName','roomId','linkCards'));}
+
+        // メンバーかどうか確かめる
+        if (checkIsHeMember(\Auth::id(),$roomId)) {return view('child/room',compact('roomName','roomId','linkCards'));}
         else {
-            // メンバーかどうか確かめる
-            if (checkIsHeMember(\Auth::id(),$roomId)) {return view('child/room',compact('roomName','roomId','linkCards','pageCount'));}
-            else {return $this->myRoom();}
+            //公開かどうか確かめる
+            if (isRoomPublic($roomId)) {
+                //メンバーに加える
+                joinMember(\Auth::id(),$roomId);
+                return view('child/room',compact('roomName','roomId','linkCards'));
+            } else {
+                // 弾く
+                return view('child/room')
+                ->with('roomName','マイルーム');
+            }
         }
     }
 
@@ -141,10 +150,19 @@ class HomeController extends Controller
     public function withdrawal()
     {
         // 論理削除
-        User::where('id',\Auth::id())->update(['deleted_at' => date("Y-m-d H:i:s",time())]);
-        return view('child/Myroom')
-        ->with('roomName','Myroom');
+        DB::transaction(function () {
+            User::where('id',\Auth::id())->update(['deleted_at' => date("Y-m-d H:i:s",time())]);
+        });
+        return view('child/Myroom')->with('roomName','Myroom');
     }
+
+}
+
+function joinMember($userId,$roomId)
+{
+    DB::transaction(function () use($roomId,$userId){
+        RoomMember::insert(['room_id' => $roomId,'member_id' => $userId]);
+    });
 
 }
 
@@ -180,11 +198,11 @@ function checkIsHeMember($userId,$roomId)
             ->exists();//メンバーならtrue
 }
 
-function findGroupsUserBelongto(){
+function findRoomsUserBelongto($userId){
     return RoomMember::select('room_id','rooms.name as roomName','users.name as ownerName')
         ->join('rooms','rooms.id','=','room_id')
         ->join('users','users.id','=','rooms.owner_id')
-        ->Where('member_id','=',\Auth::id())
+        ->Where('member_id','=',$userId)
         ->WhereNull('rooms.deleted_at')
         ->paginate(5);
 }
