@@ -65,7 +65,7 @@ class HomeController extends Controller
 
     public function transitionToRoom()
     {
-        $roomId    = Request::query('roomId');
+        $roomId    = \Request::query('roomId');
         $roomName  = Room::getRoomName($roomId);
         $linkCards = LinkCard::getLinkCards($roomId);
 
@@ -108,7 +108,7 @@ class HomeController extends Controller
 
     public function searchRoom()
     {
-        $searchName = Request::query('searchName');
+        $searchName = \Request::query('searchName');
         $rooms      = Room::getRooms($searchName);
 
         return view('child/searchRoom',compact('rooms'))
