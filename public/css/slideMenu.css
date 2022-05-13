@@ -31,19 +31,21 @@
   color: #fff;
   text-decoration: none;
   white-space: nowrap;
+  font-size: 4vmin;
 }
 
 .RightSlideMenu nav a:hover {
   color: black;
+  background-color: #f0f0f0;
+}
+
+.RightSlideMenu nav a p {
+  margin: 0;
 }
 
 .RightSlideMenu nav li {
   margin: 4vmin 0;
   list-style: none;
-}
-
-.RightSlideMenu nav li:hover {
-  background-color: #f0f0f0;
 }
 
 @media screen and (max-width: 768px) {
