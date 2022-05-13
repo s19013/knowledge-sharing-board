@@ -98,7 +98,7 @@ class HomeController extends Controller
     public function makeLinkCard(Request $request)
     {
         $posts=$request->all();
-        LinkCardModel::addCardToDB($posts);
+        LinkCard::addCardToDB($posts);
         // 二重送信防止になるらしい
         $request->session()->regenerateToken();
 
