@@ -25,7 +25,7 @@ return new class extends Migration
             $table->softDeletes();
 
             //ユニーク成約
-            $table->unique(['email','deleted_at'],'users_email_unique');//退会後の再登録時に同じメアドを登録できるようにするため
+            $table->unique(['email','deleted_at'],'users_email_unique');//退会後の再登録時に同じメアドを登録できるらしい
         });
     }
 
