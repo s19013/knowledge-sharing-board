@@ -32,7 +32,6 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function myRoom(){
-        // if (!(Auth::check())) {return redirect('/login');}
         $rooms = findRoomsUserBelongto(\Auth::id());
         $this->imgUrl= getImgUrl(\Auth::id());
         return view('child/myRoom',compact('rooms'))
