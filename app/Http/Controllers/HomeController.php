@@ -132,6 +132,20 @@ class HomeController extends Controller
         return view('child/searchRoom',compact('roomName','rooms'));
     }
 
+    public function transitionToWithdrawal()
+    {
+        return view('child/withdrawal')
+        ->with('roomName','退会');
+    }
+
+    public function withdrawal()
+    {
+        // 論理削除
+        User::where('id',\Auth::id())->update(['deleted_at' => date("Y-m-d H:i:s",time())]);
+        return view('child/Myroom')
+        ->with('roomName','Myroom');
+    }
+
 }
 
 function getLinkCards($roomId)
@@ -145,6 +159,7 @@ function isRoomPublic($roomId)
 {
     $public = Room::select('public')
             ->where('id','=',$roomId)
+            ->WhereNull('deleted_at')
             ->first();
     if ($public['public'] == 1) {return true;}
     else {return false;}
@@ -166,7 +181,7 @@ function checkIsHeMember($userId,$roomId)
 }
 
 function findGroupsUserBelongto(){
-        return RoomMember::select('room_id','rooms.name as roomName','users.name as ownerName')
+    return RoomMember::select('room_id','rooms.name as roomName','users.name as ownerName')
         ->join('rooms','rooms.id','=','room_id')
         ->join('users','users.id','=','rooms.owner_id')
         ->Where('member_id','=',\Auth::id())
