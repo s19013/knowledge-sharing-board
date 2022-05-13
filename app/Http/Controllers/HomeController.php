@@ -36,7 +36,7 @@ class HomeController extends Controller
     public function myRoom(){
         $rooms = findRoomsUserBelongto(\Auth::id());
         $this->imgUrl= getImgUrl(\Auth::id());
-        return view('child/myRoom',compact('roomsUserBelongTo'))
+        return view('child/myRoom',compact('rooms'))
         ->with('roomName','マイルーム')
         ->with('imgUrl',$this->imgUrl);
     }
@@ -54,7 +54,7 @@ class HomeController extends Controller
 
         $roomId = DB::transaction(function() use($posts){
             // roomDBにデータを登録.
-            $roomId = Room::insertGetId(['owner_id' => \Auth::id(),'name' => $posts['roomName'],'public'=>1]);
+            $roomId = Room::insertGetId(['owner_id' => \Auth::id(),'name' => $posts['roomName'],'public'=>1,'comment' => $posts['comment']]);
             return $roomId;
         });
 
@@ -119,7 +119,7 @@ class HomeController extends Controller
         $roomName = '部屋を探す';
         $searchName =\Request::query('searchName');
         $serchQuery = User::query()
-        ->select('users.name AS ownerName','rooms.name AS roomName','rooms.id as room_id')
+        ->select('users.name AS ownerName','rooms.name AS roomName','rooms.id as room_id','rooms.comment as comment')
         ->join('rooms','users.id','=','rooms.owner_id');
 
         if (!empty($searchName)) {
