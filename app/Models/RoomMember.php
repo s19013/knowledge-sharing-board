@@ -24,7 +24,7 @@ class RoomMember extends Model
                 ->exists();//メンバーならtrue
     }
 
-    protected function findRoomsUserBelongto($userId)
+    protected function findRoomsUserBelongTo($userId)
     {
         return RoomMember::select('room_id','rooms.name as roomName','users.name as ownerName')
             ->join('rooms','rooms.id','=','room_id')
