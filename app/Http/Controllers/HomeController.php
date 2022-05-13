@@ -61,7 +61,7 @@ class HomeController extends Controller
         // 二重送信防止になるらしい
         $request->session()->regenerateToken();
         // 実際に画面に移動する
-        return redirect()->route('transitionToRoom', ['roomId' => $posts['roomId']]);
+        return redirect()->route('transitionToRoom', ['roomId' => $roomId]);
     }
 
     public function transitionToRoom()
@@ -71,7 +71,6 @@ class HomeController extends Controller
         // dd($pageCount);
         $linkCards = getLinkCards($roomId);
         //公開かどうか確かめる
-        // if (isRoomPublic($roomId)) {return view('child/room',compact('roomName','roomId','linkCards','pageCount'));}
         if (isRoomPublic($roomId)) {return view('child/room',compact('roomName','roomId','linkCards'));}
         else {
             // メンバーかどうか確かめる
@@ -128,7 +127,7 @@ class HomeController extends Controller
             }
         }
 
-        $rooms = $serchQuery->paginate(2);
+        $rooms = $serchQuery->paginate(10);
 
         return view('child/searchRoom',compact('roomName','rooms'));
     }
@@ -139,7 +138,7 @@ function getLinkCards($roomId)
 {
     return LinkCard::select('title','comment','url')
             ->where('room_id','=',$roomId)
-            ->paginate(5);
+            ->paginate(100);
 }
 
 function isRoomPublic($roomId)
