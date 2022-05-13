@@ -33,8 +33,8 @@ class HomeController extends Controller
      */
 
     public function myRoom(){
-        $rooms = RoomMember::findRoomsUserBelongTo(\Auth::id());
-        $this->imgUrl= User::getImgUrl(\Auth::id());
+        $rooms = RoomMember::findRoomsUserBelongTo(Auth::id());
+        $this->imgUrl= User::getImgUrl(Auth::id());
 
         return view('child/myRoom',compact('rooms'))
         ->with('roomName','マイルーム')
@@ -52,10 +52,10 @@ class HomeController extends Controller
         $posts=$request->all();
 
         // 受け取ったデータをdbに登録してその部屋のIDを受け取る
-        $roomId = Room::addRoomToDB($posts,\Auth::id());
+        $roomId = Room::addRoomToDB($posts,Auth::id());
 
         //ユーザーを作った部屋のメンバーに加える
-        RoomMember::joinMember(\Auth::id(),$roomId);
+        RoomMember::joinMember(Auth::id(),$roomId);
 
         // 二重送信防止
         $request->session()->regenerateToken();
@@ -65,17 +65,17 @@ class HomeController extends Controller
 
     public function transitionToRoom()
     {
-        $roomId =\Request::query('roomId');
+        $roomId =Request::query('roomId');
         $roomName = Room::getRoomName($roomId);
         $linkCards = LinkCard::getLinkCards($roomId);
 
         // メンバーかどうか確かめる
-        if (RoomMember::isHeMember(\Auth::id(),$roomId)) {return view('child/room',compact('roomName','roomId','linkCards'));}
+        if (RoomMember::isHeMember(Auth::id(),$roomId)) {return view('child/room',compact('roomName','roomId','linkCards'));}
         else {
             //公開かどうか確かめる
             if (Room::isRoomPublic($roomId)) {
                 //メンバーに加える
-                RoomMember::joinMember(\Auth::id(),$roomId);
+                RoomMember::joinMember(Auth::id(),$roomId);
                 return view('child/room',compact('roomName','roomId','linkCards'));
             } else {
                 // 弾く
@@ -108,7 +108,7 @@ class HomeController extends Controller
 
     public function searchRoom()
     {
-        $searchName =\Request::query('searchName');
+        $searchName =Request::query('searchName');
         $rooms = Room::getRooms($searchName);
 
         return view('child/searchRoom',compact('rooms'))
