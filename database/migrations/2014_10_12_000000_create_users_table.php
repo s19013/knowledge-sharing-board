@@ -16,12 +16,14 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->unsignedBigInteger('id',true);
             $table->string('name',30);
-            $table->string('email')->unique();
+            $table->string('email');
             $table->longText('imgUrl')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
+            $table->unique(['email','deleted_at'],'users_email_unique');//退会後の再登録時に同じメアドを登録できるようにするため
         });
     }
 
