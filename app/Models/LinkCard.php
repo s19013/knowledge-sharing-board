@@ -25,7 +25,7 @@ class LinkCard extends Model
     protected function getLinkCards($roomId)
     {
         return LinkCard::select('title','comment','url')
-                ->where('room_id','=',$roomId)
-                ->paginate(100);
+        ->where('room_id','=',$roomId)
+        ->paginate(100);
     }
 }

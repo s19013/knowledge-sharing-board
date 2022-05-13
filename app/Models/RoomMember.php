@@ -27,10 +27,10 @@ class RoomMember extends Model
     protected function findRoomsUserBelongTo($userId)
     {
         return RoomMember::select('room_id','rooms.name as roomName','users.name as ownerName')
-            ->join('rooms','rooms.id','=','room_id')
-            ->join('users','users.id','=','rooms.owner_id')
-            ->Where('member_id','=',$userId)
-            ->WhereNull('rooms.deleted_at')
-            ->paginate(5);
+                ->join('rooms','rooms.id','=','room_id')
+                ->join('users','users.id','=','rooms.owner_id')
+                ->Where('member_id','=',$userId)
+                ->WhereNull('rooms.deleted_at')
+                ->paginate(5);
     }
 }

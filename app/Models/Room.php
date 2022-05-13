@@ -39,8 +39,8 @@ class Room extends Model
     protected function getRooms($searchName)
     {
         $serchQuery = Room::query()
-        ->select('users.name AS ownerName','rooms.name AS roomName','rooms.id as room_id','rooms.comment as comment')
-        ->join('users','users.id','=','rooms.owner_id');
+                ->select('users.name AS ownerName','rooms.name AS roomName','rooms.id as room_id','rooms.comment as comment')
+                ->join('users','users.id','=','rooms.owner_id');
 
         if (!empty($searchName)) {
             // 全角スペースを半角に変換
