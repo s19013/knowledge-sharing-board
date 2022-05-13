@@ -11,6 +11,6 @@
 @section('content')
 <div class="container">
     <p>本当に退会しますか?</p>
-    <a href=""><button >退会する</button></a>
+    <a href="{{route('withdrawal')}}"><button >退会する</button></a>
 </div>
 @endsection
