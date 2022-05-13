@@ -35,7 +35,7 @@ window.addEventListener('load', function(){
         </div>
         <div class="formBlock">
             <h2>URL <span class="fs-6 text-danger">[必須]</span></h2>
-            <input type="text" name="url" class="w-100" required autofocus>
+            <input type="text" name="url" class="w-100" minlength='10' required autofocus>
         </div>
         <div class="formBlock">
             <h2>コメント</h2>
