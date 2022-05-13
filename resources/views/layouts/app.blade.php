@@ -11,7 +11,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
-    <script src="/js/slide.js"></script>{{-- 余りよい方法では無いが他に手段がないので今はこれで  --}}
+    <script src="{{ asset('js/slide.js') }}"></script>
     @yield('js')
 
     <!-- Fonts -->
@@ -63,7 +63,7 @@
                     </ul>
                 </nav>
             </div>
-
+        </div>
     </header>
     <div id="app">
         <main class="py-4">
