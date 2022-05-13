@@ -90,7 +90,7 @@ class HomeController extends Controller
         $posts  = $request->all();
         $roomId = $posts['roomId'];
 
-        return view('child/makeLinkCard',compact('roomName','roomId'))
+        return view('child/makeLinkCard',compact('roomId'))
         ->with('roomName','リンクカード作成')
         ;
     }
