@@ -33,8 +33,8 @@ class HomeController extends Controller
      */
 
     public function myRoom(){
-        $rooms = RoomMember::findRoomsUserBelongTo(Auth::id());
         $this->imgUrl= User::getImgUrl(Auth::id());
+        $rooms = RoomMember::findRoomsUserBelongTo(Auth::id());
 
         return view('child/myRoom',compact('rooms'))
         ->with('roomName','マイルーム')
@@ -49,7 +49,7 @@ class HomeController extends Controller
 
     public function makeRoom(Request $request)
     {
-        $posts=$request->all();
+        $posts  = $request->all();
 
         // 受け取ったデータをdbに登録してその部屋のIDを受け取る
         $roomId = Room::addRoomToDB($posts,Auth::id());
@@ -65,8 +65,8 @@ class HomeController extends Controller
 
     public function transitionToRoom()
     {
-        $roomId =Request::query('roomId');
-        $roomName = Room::getRoomName($roomId);
+        $roomId    = Request::query('roomId');
+        $roomName  = Room::getRoomName($roomId);
         $linkCards = LinkCard::getLinkCards($roomId);
 
         // メンバーかどうか確かめる
@@ -87,8 +87,8 @@ class HomeController extends Controller
 
     public function transitionToMakeLinkCard(Request $request)
     {
-        $posts=$request->all();
-        $roomId=$posts['roomId'];
+        $posts  = $request->all();
+        $roomId = $posts['roomId'];
 
         return view('child/makeLinkCard',compact('roomName','roomId'))
         ->with('roomName','リンクカード作成')
@@ -108,8 +108,8 @@ class HomeController extends Controller
 
     public function searchRoom()
     {
-        $searchName =Request::query('searchName');
-        $rooms = Room::getRooms($searchName);
+        $searchName = Request::query('searchName');
+        $rooms      = Room::getRooms($searchName);
 
         return view('child/searchRoom',compact('rooms'))
         ->with('roomName','部屋を探す');
