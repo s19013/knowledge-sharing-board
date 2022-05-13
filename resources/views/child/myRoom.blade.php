@@ -5,6 +5,7 @@
 
 @section('css')
 <link rel="stylesheet" href="{{ asset('css/myRoom.css') }}">
+<link rel="stylesheet" href="{{ asset('css/roomContainer.css') }}">
 @endsection
 @section('content')
 <div class="container">
@@ -29,7 +30,7 @@
                         <p class="comment m-0">コメント</p>
                     </div>
                 </div>
-                <button onclick="location.href='/room?roomId={{$room['room_id']}}&page=1'" >部屋に入る</button>
+                <a href="/room?roomId={{$room['room_id']}}&page=1"><button>部屋に入る</button></a>
             </div>
         @endforeach
     </div>
