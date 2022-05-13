@@ -45,9 +45,9 @@
             <div class="RightSlideMenu">
                 <nav id="RightSlideMenuNav">
                     <ul class="p-0">
-                        <li><a href="{{route('myRoom')}}">マイルーム</a></li>
-                        <li><a href="{{route('transitionToMakeRoom')}}">部屋を作る</a></li>
-                        <li><a href="{{route('searchRoom')}}">部屋を探す</a></li>
+                        <li><a href="{{route('myRoom')}}"><p>マイルーム</p></a></li>
+                        <li><a href="{{route('transitionToMakeRoom')}}"><p>部屋を作る</p></a></li>
+                        <li><a href="{{route('searchRoom')}}"><p>部屋を探す</p></a></li>
                         <li>
                             <a class="dropdown-item p-0" href="{{ route('logout') }}"
                             onclick="event.preventDefault();
@@ -59,6 +59,7 @@
                                  @csrf
                             </form>
                         </li>
+                        <li><a href="{{route('transitionToWithdrawal')}}"><p>退会</p></a></li>
                     </ul>
                 </nav>
             </div>
