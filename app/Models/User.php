@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
+use DB;
 
 class User extends Authenticatable
 {
@@ -46,4 +47,17 @@ class User extends Authenticatable
     ];
 
     protected $dates = ['deleted_at'];
+
+    protected function deleteUser($userId)
+    {
+        $user = User::find($userId);
+        $user->delete();
+    }
+
+    protected function getImgUrl($userId){
+        $imgUrl = User::select('imgUrl')
+                ->where('id','=',$userId)
+                ->first();
+        return  $imgUrl['imgUrl'];
+    }
 }

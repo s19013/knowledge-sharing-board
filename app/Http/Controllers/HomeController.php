@@ -24,6 +24,10 @@ class HomeController extends Controller
         $this->middleware('auth');
         // グローバル変数とかでデータを一時保存とかしたほうがいい気がする
         $this->imgUrl = null;
+        $this->User = new User;
+        $this->Room = new Room;
+        $this->RoomMember = new RoomMember;
+        $this->LinkCard = new LinkCard;
     }
 
     /**
@@ -32,8 +36,8 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function myRoom(){
-        $rooms = findRoomsUserBelongto(\Auth::id());
-        $this->imgUrl= getImgUrl(\Auth::id());
+        $rooms = $this->RoomMember->findRoomsUserBelongto(\Auth::id());
+        $this->imgUrl= $this->User->getImgUrl(\Auth::id());
         return view('child/myRoom',compact('rooms'))
         ->with('roomName','マイルーム')
         ->with('imgUrl',$this->imgUrl);
@@ -50,14 +54,11 @@ class HomeController extends Controller
         $posts=$request->all();
         $roomId = '';
 
-        $roomId = DB::transaction(function() use($posts){
-            // roomDBにデータを登録.
-            $roomId = Room::insertGetId(['owner_id' => \Auth::id(),'name' => $posts['roomName'],'public'=>1,'comment' => $posts['comment']]);
-            return $roomId;
-        });
+        // 受け取ったデータをdbに登録してその部屋のIDを受け取る
+        $roomId = $this->Room->addRoomToDB($posts,\Auth::id());
 
         //ユーザーを作った部屋のメンバーに加える
-        joinMember(\Auth::id(),$roomId);
+        $this->RoomMember->joinMember(\Auth::id(),$roomId);
         // 二重送信防止
         $request->session()->regenerateToken();
 
@@ -67,16 +68,16 @@ class HomeController extends Controller
     public function transitionToRoom()
     {
         $roomId =\Request::query('roomId');
-        $roomName = getRoomsName($roomId);
-        $linkCards = getLinkCards($roomId);
+        $roomName = $this->Room->getRoomName($roomId);
+        $linkCards = $this->LinkCard->getLinkCards($roomId);
 
         // メンバーかどうか確かめる
-        if (checkIsHeMember(\Auth::id(),$roomId)) {return view('child/room',compact('roomName','roomId','linkCards'));}
+        if ($this->RoomMember->isHeMember(\Auth::id(),$roomId)) {return view('child/room',compact('roomName','roomId','linkCards'));}
         else {
             //公開かどうか確かめる
-            if (isRoomPublic($roomId)) {
+            if ($this->Room->isRoomPublic($roomId)) {
                 //メンバーに加える
-                joinMember(\Auth::id(),$roomId);
+                $this->RoomMember->joinMember(\Auth::id(),$roomId);
                 return view('child/room',compact('roomName','roomId','linkCards'));
             } else {
                 // 弾く
@@ -97,14 +98,7 @@ class HomeController extends Controller
     public function makeLinkCard(Request $request)
     {
         $posts=$request->all();
-        DB::transaction(function() use($posts){
-            // roomDBにデータを登録.
-            LinkCard::insert(['user_id' => \Auth::id(),
-            'room_id' => $posts['roomId'],
-            'title'=>$posts['title'],
-            'comment'=>$posts['comment'],
-            'url'=>$posts['url']]);
-        });
+        $this->LinkCard->addCardToDB($posts);
         // 二重送信防止になるらしい
         $request->session()->regenerateToken();
 
@@ -148,66 +142,9 @@ class HomeController extends Controller
     public function withdrawal()
     {
         // 論理削除
-        $user = User::find(Auth::id());
-        $user->delete();
+        $this->User->deleteUser(Auth::id());
         Auth::logout();
         return redirect(route('login'));
     }
 
-}
-
-function joinMember($userId,$roomId)
-{
-    DB::transaction(function () use($roomId,$userId){
-        RoomMember::insert(['room_id' => $roomId,'member_id' => $userId]);
-    });
-
-}
-
-function getLinkCards($roomId)
-{
-    return LinkCard::select('title','comment','url')
-            ->where('room_id','=',$roomId)
-            ->paginate(100);
-}
-
-function isRoomPublic($roomId)
-{
-    $public = Room::select('public')
-            ->where('id','=',$roomId)
-            ->WhereNull('deleted_at')
-            ->first();
-    if ($public['public'] == 1) {return true;}
-    else {return false;}
-}
-
-function getRoomsName($roomId)
-{
-    $roomName = Room::select('name')
-            ->where('id','=',$roomId)
-            ->first();
-    return $roomName['name'];
-}
-
-function checkIsHeMember($userId,$roomId)
-{
-    return RoomMember::where('member_id','=',$userId)
-            ->where('room_id','=',$roomId)
-            ->exists();//メンバーならtrue
-}
-
-function findRoomsUserBelongto($userId){
-    return RoomMember::select('room_id','rooms.name as roomName','users.name as ownerName')
-        ->join('rooms','rooms.id','=','room_id')
-        ->join('users','users.id','=','rooms.owner_id')
-        ->Where('member_id','=',$userId)
-        ->WhereNull('rooms.deleted_at')
-        ->paginate(5);
-}
-
-function getImgUrl($userId){
-    $imgUrl = User::select('imgUrl')
-            ->where('id','=',$userId)
-            ->first();
-    return  $imgUrl['imgUrl'];
 }
