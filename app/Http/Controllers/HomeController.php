@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Auth;
 use App\Models\LinkCard;
 use App\Models\Room;
 use App\Models\RoomMember;
@@ -13,7 +14,6 @@ use DB;
 
 class HomeController extends Controller
 {
-
     /**
      * Create a new controller instance.
      *
@@ -22,7 +22,6 @@ class HomeController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-
         // グローバル変数とかでデータを一時保存とかしたほうがいい気がする
         $this->imgUrl = null;
     }
@@ -32,8 +31,8 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-
     public function myRoom(){
+        // if (!(Auth::check())) {return redirect('/login');}
         $rooms = findRoomsUserBelongto(\Auth::id());
         $this->imgUrl= getImgUrl(\Auth::id());
         return view('child/myRoom',compact('rooms'))
@@ -150,10 +149,10 @@ class HomeController extends Controller
     public function withdrawal()
     {
         // 論理削除
-        DB::transaction(function () {
-            User::where('id',\Auth::id())->update(['deleted_at' => date("Y-m-d H:i:s",time())]);
-        });
-        return view('child/Myroom')->with('roomName','Myroom');
+        $user = User::find(Auth::id());
+        $user->delete();
+        Auth::logout();
+        return redirect(route('login'));
     }
 
 }
