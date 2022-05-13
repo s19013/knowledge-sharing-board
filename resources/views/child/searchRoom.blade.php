@@ -11,7 +11,7 @@
 <div class="container">
     <form action="{{route('searchRoom')}}" method="get">
         @csrf
-        <input type="text" name="searchName" class="searchName" minlength='2' maxlength='100' required>
+        <input type="text" name="searchName" class="searchName" maxlength='100'>
         <input type="submit" class="btn btn-primary" value="探す">
     </form>
     <div class="roomContainer border border-dark">
@@ -23,7 +23,7 @@
                     </div>
                     <div class="cardBody">
                         <p class="owner border-bottom m-0">部屋主:{{$room['ownerName']}}</p>
-                        <p class="comment m-0">コメント</p>
+                        <p class="comment m-0">{{$room['comment']}}</p>
                     </div>
                 </div>
                 <a href="/room?roomId={{$room['room_id']}}&page=1"><button>部屋に入る</button></a>

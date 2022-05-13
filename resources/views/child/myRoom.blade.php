@@ -19,7 +19,7 @@
     <h3>所属している部屋</h3>
     {{-- ここ孫bladeとかでまとめられないかな? --}}
     <div class="roomContainer border border-dark">
-        @foreach ($roomsUserBelongTo as $room)
+        @foreach ($rooms as $room)
             <div class="room m-1 border border-dark">
                 <div class="Card border-end border-dark m-0">
                     <div class="cardHeader fs-4 font-weight-bold">
@@ -27,7 +27,7 @@
                     </div>
                     <div class="cardBody">
                         <p class="owner border-bottom m-0">部屋主:{{$room['ownerName']}}</p>
-                        <p class="comment m-0">コメント</p>
+                        <p class="comment m-0">{{$room['comment']}}</p>
                     </div>
                 </div>
                 <a href="/room?roomId={{$room['room_id']}}&page=1"><button>部屋に入る</button></a>
@@ -35,7 +35,7 @@
         @endforeach
     </div>
     <footer>
-        {{$roomsUserBelongTo->links()}}
+        {{$rooms->links()}}
     </footer>
 </div>
 @endsection
