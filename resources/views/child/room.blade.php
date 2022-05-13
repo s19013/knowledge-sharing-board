@@ -17,7 +17,7 @@
     </form>
     <div class="bord border border-dark">
         @foreach ($linkCards as $card)
-        <a href="{{$card['url']}}">
+        <a href="{{$card['url']}}"  target="_blank" rel="noopener noreferrer">
             <div class="card">
                 <h5 class="card-header">{{$card['title']}}</h5>
                 <div class="card-body">
