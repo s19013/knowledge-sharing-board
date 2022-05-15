@@ -24,8 +24,9 @@ class LinkCard extends Model
 
     protected function getLinkCards($roomId)
     {
-        return LinkCard::select('title','comment','url')
+        return LinkCard::select('title','comment','url','created_at')
         ->where('room_id','=',$roomId)
+        ->orderby('created_at','desc')
         ->paginate(100);
     }
 }
