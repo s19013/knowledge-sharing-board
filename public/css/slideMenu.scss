@@ -1,0 +1,59 @@
+.RightSlideMenu{
+      /* メニュー */
+      nav {
+        background: #0bd;
+        position: absolute;
+        z-index: 10;//これで10前のレイヤーへ
+        right: 0; //初期の位置
+        top:6vmin;
+        overflow-x: hidden;
+        text-align: center;
+        width: 0;
+        height: 100vh;
+        transition: .2s; /* アニメ */
+
+        /* メニューを開いた時 */
+        &.open-menu {
+          width: 80vmin;
+          height: 100vh;
+          transition: .2s; /* アニメ */
+        }
+
+        a {
+            color: #fff;
+            text-decoration: none;
+            white-space: nowrap;
+            font-size: 4vmin;
+            &:hover{
+                color: rgb(0, 0, 0);
+                background-color: rgb(240, 240, 240);
+            }
+            p{
+                margin: 0;
+            }
+        }
+
+        li {
+            margin: 4vmin 0;
+            list-style:none;
+        }
+      }
+
+      @media screen and (max-width:768px) {
+        nav{
+            top:10vmin;
+            li {
+                margin: 10vmin 0;
+                list-style:none;
+                &:hover{
+                    background-color: rgb(240, 240, 240);
+                }
+            }
+
+            &.open-menu {
+                width: 100vmin;
+            }
+        }
+    }
+}
+

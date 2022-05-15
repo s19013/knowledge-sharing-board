@@ -1,0 +1,49 @@
+header {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 14% 1fr 14%;
+      grid-template-columns: 14% 1fr 14%;
+  -ms-grid-rows: 6vmin;
+      grid-template-rows: 6vmin;
+  background-color: #e1e1e1;
+  border-bottom: 1px solid black;
+}
+
+header .roomName {
+  -ms-grid-column: 2;
+  -ms-grid-column-span: 1;
+  grid-column: 2/3;
+  -ms-grid-row: 1;
+  grid-row: 1;
+  width: 100%;
+  margin: 1.5vmin 0;
+  font-size: 3vmin;
+}
+
+header .myRoomIconContena {
+  -ms-grid-column: 3;
+  -ms-grid-column-span: 1;
+  grid-column: 3/4;
+  -ms-grid-row: 1;
+  grid-row: 1;
+  margin: auto;
+}
+
+header img {
+  width: 4vmin;
+  height: 4vmin;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+@media screen and (max-width: 768px) {
+  header {
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: 5% 1fr 14%;
+        grid-template-columns: 5% 1fr 14%;
+    -ms-grid-rows: 10vmin;
+        grid-template-rows: 10vmin;
+  }
+}
+/*# sourceMappingURL=header.css.map */

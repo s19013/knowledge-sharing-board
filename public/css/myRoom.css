@@ -1,0 +1,57 @@
+.container {
+  max-width: 180vmin;
+}
+
+.userInfBox {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 5% 10% 10% 10% 10% 10% 10% 10% 10% 10% 5%;
+      grid-template-columns: 5% 10% 10% 10% 10% 10% 10% 10% 10% 10% 5%;
+  -ms-grid-rows: 10vmin;
+      grid-template-rows: 10vmin;
+}
+
+.userInfBox img {
+  -ms-grid-column: 2;
+  -ms-grid-column-span: 1;
+  grid-column: 2/3;
+  -ms-grid-row: 1;
+  grid-row: 1;
+  width: 9vmin;
+  height: 9vmin;
+  -o-object-fit: cover;
+     object-fit: cover;
+  margin: auto;
+}
+
+.userInfBox p {
+  -ms-grid-column: 4;
+  -ms-grid-column-span: 8;
+  grid-column: 4/12;
+  -ms-grid-row: 1;
+  grid-row: 1;
+  border: 1px solid #999;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  width: 100%;
+  font-size: 3vmin;
+}
+
+h3 {
+  font-size: 5vmin;
+  margin: 2vmin;
+}
+
+@media screen and (max-width: 500px) {
+  .userInfBox p {
+    font-size: 2vmin;
+  }
+}
+/*# sourceMappingURL=myRoom.css.map */

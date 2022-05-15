@@ -1,0 +1,22 @@
+.container{
+    max-width: 180vmin;
+}
+a{
+    text-decoration: none;
+    color: black;
+}
+
+.card{
+    margin: 1vmin;
+}
+
+@media screen and (min-width:768px) {
+    .bord{
+        display: flex;
+        flex-wrap:wrap;
+        .card{
+            width: auto;
+            max-width: 55vmin;
+        }
+    }
+}

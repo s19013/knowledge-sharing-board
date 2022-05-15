@@ -1,0 +1,41 @@
+header{
+    display: grid;
+    grid-template-columns:14% 1fr 14%;
+    grid-template-rows: 6vmin;
+    background-color: rgb(225, 225, 225);
+    border-bottom: 1px solid rgb(0, 0, 0);
+
+    .roomName{
+        grid-column:2/3;
+        grid-row: 1;
+        width: 100%;
+        margin: 1.5vmin 0;
+        font-size: 3vmin;
+    }
+
+    .myRoomIconContena{
+        grid-column: 3/4;
+        grid-row: 1;
+        margin : auto
+
+    }
+
+    // 改善すべきところが沢山あるけど時間がないので妥協!
+    img{
+        width: 4vmin;
+        height: 4vmin;
+        object-fit: cover;
+    }
+}
+
+@media screen and (max-width:768px) {
+    header{
+        display: grid;
+        grid-template-columns:5% 1fr 14%;
+        grid-template-rows: 10vmin;
+
+    }
+}
+
+
+

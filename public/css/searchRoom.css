@@ -1,0 +1,36 @@
+.container {
+  max-width: 180vmin;
+}
+
+form {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 80% 20%;
+      grid-template-columns: 80% 20%;
+  -ms-grid-rows: 5vmin;
+      grid-template-rows: 5vmin;
+}
+
+form .searchName {
+  width: 100%;
+  height: 100%;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 1;
+  grid-column: 1/2;
+  -ms-grid-row: 1;
+  grid-row: 1;
+}
+
+form .btn {
+  -ms-grid-column: 2;
+  -ms-grid-column-span: 1;
+  grid-column: 2/3;
+  -ms-grid-row: 1;
+  grid-row: 1;
+  width: 98%;
+  height: 100%;
+  margin: auto 1vmin;
+  padding: 0;
+  font-size: 2vmin;
+}
+/*# sourceMappingURL=searchRoom.css.map */

@@ -1,0 +1,41 @@
+.container{
+    max-width: 180vmin;
+}
+.userInfBox{
+    display: grid;
+    grid-template-columns: 5% 10% 10% 10% 10% 10% 10% 10% 10% 10% 5%;
+    grid-template-rows: 10vmin;
+
+    img{
+        grid-column: 2/3;
+        grid-row: 1;
+        width: 9vmin;
+        height: 9vmin;
+        object-fit: cover;
+        margin : auto;
+    }
+
+    p{
+        grid-column: 4/12;
+        grid-row: 1;
+        border: 1px solid #999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        font-size: 3vmin;
+    }
+}
+
+h3{
+    font-size: 5vmin;
+    margin: 2vmin;
+}
+
+@media screen and (max-width:500px) {
+    .userInfBox{
+        p{
+            font-size: 2vmin;
+        }
+    }
+}

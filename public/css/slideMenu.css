@@ -1,0 +1,66 @@
+@charset "UTF-8";
+.RightSlideMenu {
+  /* メニュー */
+}
+
+.RightSlideMenu nav {
+  background: #0bd;
+  position: absolute;
+  z-index: 10;
+  right: 0;
+  top: 6vmin;
+  overflow-x: hidden;
+  text-align: center;
+  width: 0;
+  height: 100vh;
+  -webkit-transition: .2s;
+  transition: .2s;
+  /* アニメ */
+  /* メニューを開いた時 */
+}
+
+.RightSlideMenu nav.open-menu {
+  width: 80vmin;
+  height: 100vh;
+  -webkit-transition: .2s;
+  transition: .2s;
+  /* アニメ */
+}
+
+.RightSlideMenu nav a {
+  color: #fff;
+  text-decoration: none;
+  white-space: nowrap;
+  font-size: 4vmin;
+}
+
+.RightSlideMenu nav a:hover {
+  color: black;
+  background-color: #f0f0f0;
+}
+
+.RightSlideMenu nav a p {
+  margin: 0;
+}
+
+.RightSlideMenu nav li {
+  margin: 4vmin 0;
+  list-style: none;
+}
+
+@media screen and (max-width: 768px) {
+  .RightSlideMenu nav {
+    top: 10vmin;
+  }
+  .RightSlideMenu nav li {
+    margin: 10vmin 0;
+    list-style: none;
+  }
+  .RightSlideMenu nav li:hover {
+    background-color: #f0f0f0;
+  }
+  .RightSlideMenu nav.open-menu {
+    width: 100vmin;
+  }
+}
+/*# sourceMappingURL=slideMenu.css.map */
