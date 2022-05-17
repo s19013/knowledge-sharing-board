@@ -15,7 +15,7 @@
         <input type="hidden" name="roomId" value='{{$roomId}}'>
         <input type="submit" value="リンクカード作成" class="btn btn-primary mb-2">
     </form>
-    <div class="bord border border-dark">
+    <div class="bord">
         @foreach ($linkCards as $card)
         <a href="{{$card['url']}}"  target="_blank" rel="noopener noreferrer">
             <div class="card">
