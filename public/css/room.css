@@ -2,12 +2,17 @@
   max-width: 180vmin;
 }
 
-a {
+.bord {
+  background-color: #e6c7a0;
+  border: 5px solid #b7976f;
+}
+
+.bord a {
   text-decoration: none;
   color: black;
 }
 
-.card {
+.bord .card {
   margin: 1vmin;
 }
 

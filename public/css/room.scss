@@ -1,13 +1,16 @@
-.container{
-    max-width: 180vmin;
-}
-a{
-    text-decoration: none;
-    color: black;
-}
+.container{max-width: 180vmin;}
 
-.card{
-    margin: 1vmin;
+.bord{
+    background-color: rgb(230, 199, 160);
+    border: 5px solid rgb(183, 151, 111);
+    a{
+        text-decoration: none;
+        color: black;
+    }
+
+    .card{
+        margin: 1vmin;
+    }
 }
 
 @media screen and (min-width:768px) {
