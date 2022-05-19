@@ -12,6 +12,9 @@
 ## リンク
 http://knowledge-sharing-board.link
 
+## データベース
+https://docs.google.com/spreadsheets/d/e/2PACX-1vQi2tQKDiII57i1bj-A9YiEM0koHTnLu_QTmZo4P9-XfHAIUD7Cm-v6zqrVj4iYr0wYpkC_BAum1UjS/pubhtml
+
 ## 概要
 記事や動画のurlをみんなでシェアする
 
@@ -136,6 +139,8 @@ A:こちらの不手際により､ssl化されるまで時間制限(〇〇時�
     *  [index意外のページにアクセスすると404エラーが発生する](https://teratail.com/questions/47368)
     *  [Ubuntu で apache2のDocument rootを変更する方法](https://qiita.com/bluesDD/items/3cf77298ece0c83e9968)
 * laravel
+    * [Laravel・データベースからデータ取得する全実例](https://blog.capilano-fw.com/?p=665)
+    * [【Laravel】キーワード検索機能の実装方法（複数キーワード、部分一致）](https://takuma-it.com/laravel-keyword-search/)
     * [Laravelの二重送信対策](https://kodyblog.com/duplicate-transmission-measures/)
     * [【Laravel】リダイレクトの書き方メモ](https://qiita.com/manbolila/items/767e1dae399de16813fb)
     * [Laravel8 でPaginationを簡単に美しく実装する方法【Bootstrap利用】](https://biz.addisteria.com/laravel8_pagination/)
@@ -150,3 +155,4 @@ A:こちらの不手際により､ssl化されるまで時間制限(〇〇時�
     * [HTMLのinputに入力制限をつける方法を解説！文字数や半角英数の指定なども](https://web-camp.io/magazine/archives/85005)
     * [HTML のリンクを新しいタブで開くようにする方法](https://www.freecodecamp.org/japanese/news/how-to-use-html-to-open-link-in-new-tab/)
     * [HTMLでrequired属性を使って入力フォームに必須項目を作る方法を現役デザイナーが解説](https://techacademy.jp/magazine/28499)
+    * [入力フォームのデザインのコツ20選！入力されるフォームを豊富な画像で解説](https://form.run/media/contents/design/form-design/)
