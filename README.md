@@ -130,14 +130,6 @@ Q:ssl化されていないのはなぜ?
 A:こちらの不手際により､ssl化されるまで時間制限(〇〇時間たつまで認証できない)がかけられてしまったから
 
 ### 参考にしたサイト
-* aws
-    * [Amazon Lightsail入門 〜AWSで最も安く簡単にLaravel(PHP)サーバー構築を実践しよう！〜](https://www.udemy.com/share/105nMg3@QMR6VRtHsxtCNI-qwQS7IeavG6NuNTsdXT9SKvq3oDXusxBTzlTUitNH6OKcZB8CrQ==/)
-    * [Amazon LightsailにPHP8系のLAMP環境を構築してみた](https://juno-blog.site/article/amazon-lightsail-ubuntu-php8/)
-    * [Ubuntu20.04にComposerをインストールする手順](https://mebee.info/2020/06/02/post-10844/)
-* apache
-    *  [apacheでForbiddenが出た時の設定の見直し方法](https://arc-tech.hatenablog.com/entry/2019/09/27/093513)
-    *  [index意外のページにアクセスすると404エラーが発生する](https://teratail.com/questions/47368)
-    *  [Ubuntu で apache2のDocument rootを変更する方法](https://qiita.com/bluesDD/items/3cf77298ece0c83e9968)
 * laravel
     * [LaravelのSQLインジェクション対策について、XSSとの違いと共に分かりやすく解説](https://biz.addisteria.com/laravel_sql_injection)
     * [Laravel・データベースからデータ取得する全実例](https://blog.capilano-fw.com/?p=665)
@@ -147,6 +139,14 @@ A:こちらの不手際により､ssl化されるまで時間制限(〇〇時�
     * [Laravel8 でPaginationを簡単に美しく実装する方法【Bootstrap利用】](https://biz.addisteria.com/laravel8_pagination/)
     * [【Laravel】論理削除を利用して退会機能を実装する](https://qiita.com/179Bell/items/2bf6a58d9314f5f00eeb)
     * [LaravelでSeederを使う方法！(初期データを登録する)](https://codelikes.com/laravel-seeder/)
+* aws
+    * [Amazon Lightsail入門 〜AWSで最も安く簡単にLaravel(PHP)サーバー構築を実践しよう！〜](https://www.udemy.com/share/105nMg3@QMR6VRtHsxtCNI-qwQS7IeavG6NuNTsdXT9SKvq3oDXusxBTzlTUitNH6OKcZB8CrQ==/)
+    * [Amazon LightsailにPHP8系のLAMP環境を構築してみた](https://juno-blog.site/article/amazon-lightsail-ubuntu-php8/)
+    * [Ubuntu20.04にComposerをインストールする手順](https://mebee.info/2020/06/02/post-10844/)
+* apache
+    *  [apacheでForbiddenが出た時の設定の見直し方法](https://arc-tech.hatenablog.com/entry/2019/09/27/093513)
+    *  [index意外のページにアクセスすると404エラーが発生する](https://teratail.com/questions/47368)
+    *  [Ubuntu で apache2のDocument rootを変更する方法](https://qiita.com/bluesDD/items/3cf77298ece0c83e9968)
 * javascript
     * [jQueryを使わずにスライドメニューを実装しよう](https://www.webcreatorbox.com/tech/slide-menu)
     * [JavaScript | テキストエリアで入力可能な残り文字数を表示する方法](https://1-notes.com/javascript-number-of-characters-remaining-in-the-textarea/)
