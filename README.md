@@ -139,6 +139,7 @@ A:こちらの不手際により､ssl化されるまで時間制限(〇〇時�
     *  [index意外のページにアクセスすると404エラーが発生する](https://teratail.com/questions/47368)
     *  [Ubuntu で apache2のDocument rootを変更する方法](https://qiita.com/bluesDD/items/3cf77298ece0c83e9968)
 * laravel
+    * [LaravelのSQLインジェクション対策について、XSSとの違いと共に分かりやすく解説](https://biz.addisteria.com/laravel_sql_injection)
     * [Laravel・データベースからデータ取得する全実例](https://blog.capilano-fw.com/?p=665)
     * [【Laravel】キーワード検索機能の実装方法（複数キーワード、部分一致）](https://takuma-it.com/laravel-keyword-search/)
     * [Laravelの二重送信対策](https://kodyblog.com/duplicate-transmission-measures/)
