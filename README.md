@@ -27,7 +27,7 @@ https://docs.google.com/spreadsheets/d/e/2PACX-1vQi2tQKDiII57i1bj-A9YiEM0koHTnLu
 ## 使った技術
 * php
 * laravel 
-* bootstrap5!
+* bootstrap
 * html5
 * css3
 * scss
