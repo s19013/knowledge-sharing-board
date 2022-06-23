@@ -16,7 +16,7 @@ http://knowledge-sharing-board.link
 https://docs.google.com/spreadsheets/d/e/2PACX-1vQi2tQKDiII57i1bj-A9YiEM0koHTnLu_QTmZo4P9-XfHAIUD7Cm-v6zqrVj4iYr0wYpkC_BAum1UjS/pubhtml
 
 ## スライド
-(発表資料)[https://docs.google.com/presentation/d/e/2PACX-1vTcFdwzqewHn7cVl-8MFKz8zTfPLaHjQlrhoJ40r9U-xL8dYW1DoHz0v8SkOTZ8EiVAB9VEaGhvj4jp/pub?start=false&loop=false&delayms=3000&slide=id.p]
+[発表資料](https://docs.google.com/presentation/d/e/2PACX-1vTcFdwzqewHn7cVl-8MFKz8zTfPLaHjQlrhoJ40r9U-xL8dYW1DoHz0v8SkOTZ8EiVAB9VEaGhvj4jp/pub?start=false&loop=false&delayms=3000&slide=id.p)
 
 ## 概要
 記事や動画のurlをみんなでシェアする
